@@ -59,7 +59,7 @@ public class GUI extends JFrame {
 		exitButton.setBounds(420,250,100,30);
 		
 	    accountTable=new JTable(3, 3);
-	    accountTable.setBounds(30, 90, 350, 200);
+	    accountTable.setBounds(30, 100, 350, 200);
 		getContentPane().add(accountTable);
 	}
 }
