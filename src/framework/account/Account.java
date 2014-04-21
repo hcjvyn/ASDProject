@@ -5,13 +5,15 @@ import java.util.ArrayList;
 import framework.account.entry.IEntry;
 import framework.customer.ICustomer;
 
-public class Account implements IAccount{
+public class Account implements IAccount {
 	
 	private ICustomer customer;
 	private String accountNum;
 	private double balance;
 	private ArrayList<IEntry> entryList = new ArrayList<IEntry>();
 
+	protected double interestRate;
+	
 	public Account(ICustomer customer, String accountNum) {
 		this.customer = customer;
 		this.accountNum = accountNum;
