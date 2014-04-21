@@ -1,5 +1,7 @@
 package banking;
 
-public interface IOrganization {
+import framework.ICustomer;
+
+public interface IOrganization extends ICustomer {
 
 }

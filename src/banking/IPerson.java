@@ -1,5 +1,7 @@
 package banking;
 
-public interface IPerson {
+import framework.ICustomer;
+
+public interface IPerson extends ICustomer{
 
 }
