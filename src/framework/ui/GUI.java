@@ -1,8 +1,7 @@
 package framework.ui;
 
-import java.awt.Color;
+import java.awt.*;
 import java.util.ArrayList;
-import java.util.Vector;
 
 import javax.swing.*;
 import javax.swing.table.*;
@@ -17,49 +16,65 @@ public class GUI extends JFrame {
 	private AccountManager accountManager;
 	private ArrayList<IAccountFactory> iAccountFactoryList;
 	
-	JButton addPersonalAccountButton = new JButton();
-	JButton addCompanyAccountButton = new JButton();
-	JButton addInterestButton = new JButton();
-	JButton depositButton = new JButton();
-	JButton withdrawButton = new JButton();
-	JButton exitButton = new JButton();
-	JTable accountTable = new JTable();
+	protected JPanel JPanel1 = new JPanel();
+	protected JButton AddAccountButton = new JButton();
+	protected JButton DepositButton = new JButton();
+	protected JButton WithdrawButton = new JButton();
+	protected JButton ExitButton = new JButton();
+	
+	protected DefaultTableModel model;
+	protected JTable JTable1;
+	protected JScrollPane JScrollPane1;
+	protected Object rowdata[];
 	
 	
 	public GUI()
 	{
-		setTitle("FinCo Application"); 
-		setDefaultCloseOperation(javax.swing.JFrame.EXIT_ON_CLOSE);
-		getContentPane().setLayout(null);
-		setSize(550,350);
+		setTitle("FinCo Application.");
+		setDefaultCloseOperation(javax.swing.JFrame.DO_NOTHING_ON_CLOSE);
+		getContentPane().setLayout(new BorderLayout(0,0));
+		setSize(610,350);
 		setVisible(false);
+		JPanel1.setLayout(null);
+		getContentPane().add(BorderLayout.CENTER, JPanel1);
+		JPanel1.setBounds(0,0,610,350);
+		/*
+		/Add five buttons on the pane 
+		/for Adding personal account, Adding company account
+		/Deposit, Withdraw and Exit from the system
+		*/
+        JScrollPane1 = new JScrollPane();
+        model = new DefaultTableModel();
+        JTable1 = new JTable(model);
+        rowdata = new Object[8];
+        
+        JPanel1.add(JScrollPane1);
+        JScrollPane1.setBounds(12,92,444,160);
+        JScrollPane1.getViewport().add(JTable1);
+        JTable1.setBounds(0, 0, 420, 0);
 		
-		addPersonalAccountButton.setText("Add Personal Account");
-		getContentPane().add(addPersonalAccountButton);
-		addPersonalAccountButton.setBounds(30,40,150,30);
+        AddAccountButton.setText("Add account");
+        AddAccountButton.setActionCommand("jbutton");
+		JPanel1.add(AddAccountButton);
+		AddAccountButton.setBounds(24,20,192,33);
 		
-		addCompanyAccountButton.setText("Add Company Account");
-		getContentPane().add(addCompanyAccountButton);
-		addCompanyAccountButton.setBounds(200,40,150,30);
+		DepositButton.setText("Deposit");
+		JPanel1.add(DepositButton);
+		DepositButton.setBounds(468,104,96,33);
 		
-		addInterestButton.setText("Add Interest");
-		getContentPane().add(addInterestButton);
-		addInterestButton.setBounds(370,40,150,30);
+		WithdrawButton.setText("Withdraw");
+		WithdrawButton.setBounds(468,164,96,33);
+		JPanel1.add(WithdrawButton);
 		
-		depositButton.setText("Deposit");
-		getContentPane().add(depositButton);
-		depositButton.setBounds(420,120,100,30);
-		
-		withdrawButton.setText("Withdraw");
-		getContentPane().add(withdrawButton);
-		withdrawButton.setBounds(420,180,100,30);
-		
-		exitButton.setText("Exit");
-		getContentPane().add(exitButton);
-		exitButton.setBounds(420,250,100,30);
-		
-	    accountTable=new JTable(3, 3);
-	    accountTable.setBounds(30, 100, 350, 200);
-		getContentPane().add(accountTable);
+		ExitButton.setText("Exit");
+		ExitButton.setBounds(468,248,96,31);
+		JPanel1.add(ExitButton);
+	}
+	
+	public void setTableColumns(String[] columnNames)
+	{
+		for(int i=0 ; i < columnNames.length ; i++)
+			model.addColumn(columnNames[i]);
+		rowdata = new Object[columnNames.length];
 	}
 }
