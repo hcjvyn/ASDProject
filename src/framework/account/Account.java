@@ -34,4 +34,19 @@ public class Account implements IAccount {
 		this.entryList.add(entry);
 	}
 
+	@Override
+	public ICustomer getCustomer() {
+		return this.customer;
+	}
+
+	@Override
+	public String getAccountNum() {
+		return this.accountNum;
+	}
+
+	@Override
+	public double getInterestRate() {
+		return this.interestRate;
+	}
+
 }
