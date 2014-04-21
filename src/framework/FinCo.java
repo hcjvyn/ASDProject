@@ -2,6 +2,8 @@ package framework;
 
 import javax.swing.UIManager;
 
+import framework.ui.GUI;
+
 public class FinCo {
 	public static void main(String args[])
 	{
