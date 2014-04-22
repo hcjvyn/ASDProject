@@ -2,6 +2,9 @@ package banking.ui;
 
 import javax.swing.*;
 
+import framework.account.*;
+import framework.account.factory.*;
+import framework.customer.*;
 import framework.ui.GUI;
 
 /**
@@ -125,29 +128,29 @@ public class BankFrm extends GUI
 		{
 			Object object = event.getSource();
 			if (object == ExitButton)
-				JButtonExit_actionPerformed(event);
+				ExitButton_actionPerformed(event);
 			else if (object == AddAccountButton)
-				JButtonPerAC_actionPerformed(event);
+				AddAccountButton_actionPerformed(event);
 			else if (object == AddCompanyAccountButton)
-				JButtonCompAC_actionPerformed(event);
+				AddCompanyAccountButton_actionPerformed(event);
 			else if (object == DepositButton)
-				JButtonDeposit_actionPerformed(event);
+				DepositButton_actionPerformed(event);
 			else if (object == WithdrawButton)
-				JButtonWithdraw_actionPerformed(event);
+				WithdrawButton_actionPerformed(event);
 			else if (object == AddinterestButton)
-				JButtonAddinterest_actionPerformed(event);
+				AddinterestButton_actionPerformed(event);
 			
 		}
 	}
     
     //When the Exit button is pressed this code gets executed
     //this will exit from the system
-    void JButtonExit_actionPerformed(java.awt.event.ActionEvent event)
+    void ExitButton_actionPerformed(java.awt.event.ActionEvent event)
 	{
 		System.exit(0);
 	}
 
-	void JButtonPerAC_actionPerformed(java.awt.event.ActionEvent event)
+	void AddAccountButton_actionPerformed(java.awt.event.ActionEvent event)
 	{
 		/*
 		 JDialog_AddPAcc type object is for adding personal information
@@ -158,7 +161,12 @@ public class BankFrm extends GUI
 		JDialog_AddPAcc pac = new JDialog_AddPAcc(myframe);
 		pac.setBounds(450, 20, 300, 330);
 		pac.show();
-
+		
+		ICustomer iCustomer = new Customer(clientName,street,city,state,zip);
+		IAccountFactory iAccountFactory = new DefaultAccountFactory();
+		IAccount iAccount = iAccountFactory.createAccount(iCustomer, accountnr);
+		iCustomer.addAccount(iAccount);
+		
 		if (newaccount){
             // add row to table
             rowdata[0] = accountnr;
@@ -176,7 +184,7 @@ public class BankFrm extends GUI
         
     }
 
-	void JButtonCompAC_actionPerformed(java.awt.event.ActionEvent event)
+	void AddCompanyAccountButton_actionPerformed(java.awt.event.ActionEvent event)
 	{
 		/*
 		 construct a JDialog_AddCompAcc type object 
@@ -203,7 +211,7 @@ public class BankFrm extends GUI
 
 	}
 
-	void JButtonDeposit_actionPerformed(java.awt.event.ActionEvent event)
+	void DepositButton_actionPerformed(java.awt.event.ActionEvent event)
 	{
 	    // get selected name
         int selection = JTable1.getSelectionModel().getMinSelectionIndex();
@@ -226,7 +234,7 @@ public class BankFrm extends GUI
 		
 	}
 
-	void JButtonWithdraw_actionPerformed(java.awt.event.ActionEvent event)
+	void WithdrawButton_actionPerformed(java.awt.event.ActionEvent event)
 	{
 	    // get selected name
         int selection = JTable1.getSelectionModel().getMinSelectionIndex();
@@ -252,7 +260,7 @@ public class BankFrm extends GUI
 		
 	}
 	
-	void JButtonAddinterest_actionPerformed(java.awt.event.ActionEvent event)
+	void AddinterestButton_actionPerformed(java.awt.event.ActionEvent event)
 	{
 		  JOptionPane.showMessageDialog(AddinterestButton, "Add interest to all accounts","Add interest to all accounts",JOptionPane.WARNING_MESSAGE);
 	    
