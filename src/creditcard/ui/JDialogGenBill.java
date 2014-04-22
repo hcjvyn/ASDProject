@@ -5,11 +5,20 @@ package creditcard.ui;
 */
 
 import java.awt.*;
+import java.util.ArrayList;
+import java.util.Date;
+
 import javax.swing.*;
+
+import framework.account.AccountManager;
+import framework.account.IAccount;
+import framework.account.entry.IEntry;
+import framework.customer.ICustomer;
 
 public class JDialogGenBill extends javax.swing.JDialog
 {
     String billstring;
+    AccountManager accountManager;
     
 	public JDialogGenBill(Frame parent)
 	{
@@ -26,35 +35,57 @@ public class JDialogGenBill extends javax.swing.JDialog
 		setVisible(false);
 		getContentPane().add(JScrollPane1);
 		JScrollPane1.setBounds(24,24,358,240);
-		JScrollPane1.getViewport().add(JTextField1);
-		JTextField1.setBounds(0,0,355,237);
+		JScrollPane1.getViewport().add(JTextArea1);
+		JTextArea1.setBounds(0,0,355,237);
 		JButton_OK.setText("OK");
 		JButton_OK.setActionCommand("OK");
 		getContentPane().add(JButton_OK);
 		JButton_OK.setBounds(156,276,96,24);
 
 		// generate the string for the monthly bill
-		billstring = "Name= John White\r\n";
-		billstring += "Address= 1000 Main, Fairfield, IA, 52556\r\n";
-		billstring += "CC number= 2341 3421 4444 5689\r\n";
-		billstring += "CC type= GOLD\r\n";
-		billstring += "Previous balance = $ 100.00\r\n";
-		billstring += "Total Credits = $ 25.00\r\n";
-		billstring += "Total Charges = $ 560.00\r\n";
-		billstring += "New balance = $ 638.75\r\n";
-		billstring += "Total amount due = $ 63.88\r\n";		
-		billstring += "\r\n";		
-		billstring += "\r\n";		
-		billstring += "Name= Frank Summer\r\n";
-		billstring += "Address= 1000 N, 4th St, Fairfield, IA, 52556\r\n";
-		billstring += "CC number= 0099 3421 4321 6577\r\n";
-		billstring += "CC type= BRONZE\r\n";
-		billstring += "Previous balance = $ 200.00\r\n";
-		billstring += "Total Credits = $ 45.00\r\n";
-		billstring += "Total Charges = $ 150.00\r\n";
-		billstring += "New balance = $ 313.53\r\n";
-		billstring += "Total amount due = $ 34.49\r\n";
-		JTextField1.setText(billstring);
+		for(int i=0 ; i < accountManager.getCustomerList().size() ; i++)
+		{
+			ICustomer iCustomerTemp=accountManager.getCustomerList().get(i);
+			billstring = "Name= " + iCustomerTemp.getName() + "\r\n";
+			billstring += "Address= " + iCustomerTemp.getStreet() + ", " + iCustomerTemp.getCity() + ", " + iCustomerTemp.getState() + ", " + iCustomerTemp.getZip() + "\r\n";
+			
+			IAccount iAccount = iCustomerTemp.getAccount();
+			billstring += "CC number= " + iAccount.getAccountNum() + "\r\n";
+			billstring += "CC type= " + iAccount.getAccountType() + "\r\n";
+			
+			ArrayList<IEntry> iEntryList = iAccount.getEntryList();
+			Date now=new Date();
+			double previousBalance=iAccount.getBalance(), totalCharges=0, totalCredits=0;
+			
+			for(int j=0 ; j < iEntryList.size() ; j++)
+			{
+				IEntry iEntryTemp = iEntryList.get(j);
+				Date date=iEntryTemp.getDate();
+				// haven't use dateadd for comparing
+				if(date.getMonth()==now.getMonth())
+				{
+					if(iEntryTemp.getEntryType()=="D")
+					{
+						totalCredits=totalCredits+iEntryTemp.getAmount();
+						previousBalance=previousBalance+iEntryTemp.getAmount();
+					}
+					else if(iEntryTemp.getEntryType()=="C")
+					{
+						totalCharges=totalCharges+iEntryTemp.getAmount();
+						previousBalance=previousBalance-iEntryTemp.getAmount();
+					}
+				}
+			}
+			billstring += "Previous balance = $ " + previousBalance + "\r\n";
+			billstring += "Total Credits = $ " + totalCredits + "\r\n";
+			billstring += "Total Charges = $ " + totalCharges + "\r\n";
+			double newBalance=previousBalance - totalCredits + totalCharges + iAccount.getInterestRate() * (previousBalance - totalCredits) ;
+			billstring += "New balance = $ " + newBalance + "\r\n";
+			billstring += "Total amount due = $ " + iAccount.getMinimumPayment() * newBalance + "\r\n";
+			billstring += "\r\n";		
+			billstring += "\r\n";
+		}
+		JTextArea1.setText(billstring);
 		//}}
 	
 		//{{REGISTER_LISTENERS
@@ -67,13 +98,19 @@ public class JDialogGenBill extends javax.swing.JDialog
 	{
 		this((Frame)null);
 	}
+	
+	public JDialogGenBill(AccountManager accountManager)
+	{
+		this((Frame)null);
+		this.accountManager=accountManager;
+	}
 
 
 
 	//{{DECLARE_CONTROLS
-	javax.swing.JScrollPane JScrollPane1 = new javax.swing.JScrollPane();
-	javax.swing.JTextField JTextField1 = new javax.swing.JTextField();
-	javax.swing.JButton JButton_OK = new javax.swing.JButton();
+	JScrollPane JScrollPane1 = new JScrollPane();
+	JTextArea JTextArea1 = new JTextArea();
+	JButton JButton_OK = new JButton();
 	//}}
 
 
@@ -90,6 +127,5 @@ public class JDialogGenBill extends javax.swing.JDialog
 	void JButtonOK_actionPerformed(java.awt.event.ActionEvent event)
 	{
 		dispose();
-			 
 	}
 }

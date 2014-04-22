@@ -15,5 +15,5 @@ public interface IAccount {
 	public void setBalance(double balance);
 	public void addEntry(IEntry entry);
 	public ArrayList<IEntry> getEntryList();
-
+	public double getMinimumPayment();
 }

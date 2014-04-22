@@ -14,6 +14,7 @@ public class Account implements IAccount {
 	
 	protected String accountType;
 	protected double interestRate;
+	protected double minimumPayment;
 	
 	public Account(ICustomer customer, String accountNum) {
 		this.customer = customer;
@@ -59,6 +60,12 @@ public class Account implements IAccount {
 	public ArrayList<IEntry> getEntryList() {
 		// TODO Auto-generated method stub
 		return this.getEntryList();
+	}
+
+	@Override
+	public double getMinimumPayment() {
+		// TODO Auto-generated method stub
+		return this.minimumPayment;
 	}
 
 }
