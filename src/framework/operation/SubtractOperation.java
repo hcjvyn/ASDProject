@@ -5,7 +5,8 @@ import framework.account.IAccount;
 public class SubtractOperation extends AOperation{
 
 	private double amount;
-
+	private static final String ENTRY_TYPE="C";
+	
 	/**
 	 * Initialize all variables.
 	 * @param account
@@ -21,7 +22,7 @@ public class SubtractOperation extends AOperation{
 	public void compute(IAccount acct) {
 		double newAmt = acct.getBalance()+amount;
 		acct.setBalance(newAmt);
-		addEntry(acct,amount);
+		addEntry(acct,amount,ENTRY_TYPE);
 	}
 
 

@@ -14,8 +14,8 @@ public abstract class AOperation implements IOperation {
 	
 	public abstract void compute(IAccount acct);
 	
-	public void addEntry(IAccount acct, double amount){
-		IEntry entry = new Entry(amount);
+	public void addEntry(IAccount acct, double amount, String entryType){
+		IEntry entry = new Entry(amount, entryType);
 		acct.addEntry(entry);
 		
 	}
