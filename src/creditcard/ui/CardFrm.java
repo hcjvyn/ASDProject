@@ -1,7 +1,14 @@
 package creditcard.ui;
 
-import javax.swing.*;
+import javax.swing.JButton;
+import javax.swing.JOptionPane;
+import javax.swing.UIManager;
 
+import framework.customer.ICustomer;
+import framework.transaction.AddAccountTransaction;
+import framework.transaction.ITransaction;
+import framework.transaction.TransactionManager;
+import framework.ui.AddAccDialog;
 import framework.ui.GUI;
 
 /**
@@ -142,26 +149,22 @@ public class CardFrm extends GUI
 		 set the boundaries and show it 
 		*/
 		
-		JDialog_AddCCAccount ccac = new JDialog_AddCCAccount(thisframe);
+		AddAccDialog ccac = new JDialog_AddCCAccount(thisframe);
 		ccac.setBounds(450, 20, 300, 380);
 		ccac.show();
 
-		if (newaccount){
-            // add row to table
-            rowdata[0] = clientName;
-            rowdata[1] = ccnumber;
-            rowdata[2] = expdate;
-            rowdata[3] = accountType;
-            rowdata[4] = "0";
-            model.addRow(rowdata);
-            JTable1.getSelectionModel().setAnchorSelectionIndex(-1);
-            newaccount=false;
-        }
+		ICustomer customer = ccac.getCustomer();
+		
+		ITransaction transaction = new AddAccountTransaction(accountManager, customer);
+		TransactionManager transactionManager = new TransactionManager();
+		transactionManager.submit(transaction);
+		
+		refreshTable();
     }
 
 	void GenerateMonthlyBillsButton_actionPerformed(java.awt.event.ActionEvent event)
 	{
-		JDialogGenBill billFrm = new JDialogGenBill(accountManager);
+		JDialogGenBill billFrm = new JDialogGenBill(this);
 		billFrm.setBounds(450, 20, 400, 350);
 		billFrm.show();
 	    
@@ -214,6 +217,24 @@ public class CardFrm extends GUI
 		}
 		
 		
+	}
+	
+	void refreshTable()
+	{
+		for(int i=0 ; i < model.getRowCount() ; i++)
+			model.removeRow(i);
+		
+		for(int i=0 ; i < accountManager.getCustomerList().size() ; i++)
+		{
+			ICustomer customerTemp = accountManager.getCustomerList().get(i);
+			rowdata[0] = customerTemp.getAccount().getAccountNum();
+			rowdata[1] = customerTemp.getName();
+			rowdata[2] = customerTemp.getCity();
+			rowdata[3] = "Later";
+			rowdata[4] = "Later";
+//			rowdata[5] = "0";
+			model.addRow(rowdata);
+		}
 	}
 	
 }
