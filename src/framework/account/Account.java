@@ -55,4 +55,10 @@ public class Account implements IAccount {
 		return accountType;
 	}
 
+	@Override
+	public ArrayList<IEntry> getEntryList() {
+		// TODO Auto-generated method stub
+		return this.getEntryList();
+	}
+
 }

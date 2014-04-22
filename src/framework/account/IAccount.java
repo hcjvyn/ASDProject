@@ -1,5 +1,7 @@
 package framework.account;
 
+import java.util.ArrayList;
+
 import framework.account.entry.IEntry;
 import framework.customer.ICustomer;
 
@@ -12,5 +14,6 @@ public interface IAccount {
 	public double getBalance();
 	public void setBalance(double balance);
 	public void addEntry(IEntry entry);
+	public ArrayList<IEntry> getEntryList();
 
 }
