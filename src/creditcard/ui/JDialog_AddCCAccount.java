@@ -74,9 +74,10 @@ public class JDialog_AddCCAccount extends AAddAccDialog {
 		JLabelZip.setForeground(java.awt.Color.black);
 		JLabelZip.setBounds(12,204,48,24);
 		
-		getContentPane().add(JTextField_ACNR);
-		JTextField_ACNR.setForeground(java.awt.Color.black);
-		JTextField_ACNR.setBounds(12,252,96,24);
+		JLabelAcnr.setText("CC number");
+		getContentPane().add(JLabelAcnr);
+		JLabelAcnr.setForeground(java.awt.Color.black);
+		JLabelAcnr.setBounds(12,252,96,24);
 		
 		JLabelExpDate.setText("Exp. Date");
 		getContentPane().add(JLabelExpDate);
