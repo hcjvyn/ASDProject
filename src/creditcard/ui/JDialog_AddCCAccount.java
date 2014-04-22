@@ -201,7 +201,7 @@ public class JDialog_AddCCAccount extends AddAccDialog {
 				street,
 				city,
 				state,
-				zip);
+				zip, "P");
 		
 		IAccountFactory iAccountFactory = null;
 		if (JRadioButton_Gold.isSelected())

@@ -28,9 +28,6 @@ public class BankFrm extends GUI {
         JScrollPane1.setBounds(12,92,444,160);
         JScrollPane1.getViewport().add(JTable1);
         
-        String[] columnNames= { "AccountNr", "Name", "City", "P/C", "Ch/S", "Amount" };
-        setTableColumns(columnNames);
-        
         AddAccountButton.setText("Add personal account");
         
         AddCompanyAccountButton.setText("Add company account");

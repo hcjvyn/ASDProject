@@ -10,7 +10,7 @@ public class Organization extends Customer implements IOrganization {
 
 	public Organization(String name, String street, String city, String state,
 			String zip) {
-		super(name, street, city, state, zip);
+		super(name, street, city, state, zip, "O");
 	}
 
 	@Override

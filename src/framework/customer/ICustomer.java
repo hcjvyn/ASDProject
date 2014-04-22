@@ -11,5 +11,6 @@ public interface ICustomer {
 	public String getCity();
 	public String getState();
 	public String getZip();
-
+	public String getCustomerType();
+	public String toString();
 }

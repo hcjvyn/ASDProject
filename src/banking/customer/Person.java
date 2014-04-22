@@ -11,7 +11,7 @@ public class Person extends Customer implements IPerson {
 	
 	public Person(String name, String street, String city, String state,
 			String zip, Date birthDate) {
-		super(name, street, city, state, zip);
+		super(name, street, city, state, zip, "P");
 		this.birthDate = birthDate;
 	}
 	

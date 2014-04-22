@@ -10,14 +10,16 @@ public class Customer implements ICustomer {
 	protected String state;
 	protected String zip;
 	protected IAccount account;
+	protected String customerType;
 	
 	public Customer(String name, String street, String city, String state,
-			String zip) {
+			String zip, String customerType) {
 		this.name = name;
 		this.street = street;
 		this.city = city;
 		this.state = state;
 		this.zip = zip;
+		this.customerType=customerType;
 	}
 
 	@Override
@@ -55,4 +57,14 @@ public class Customer implements ICustomer {
 		return zip;
 	}
 
+	@Override
+	public String getCustomerType() {
+		// TODO Auto-generated method stub
+		return this.customerType;
+	}
+
+	public String toString()
+	{
+		return this.name;
+	}
 }
