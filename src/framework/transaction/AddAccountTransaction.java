@@ -11,7 +11,7 @@ public class AddAccountTransaction extends ATransaction {
 	 * @param acctMgr
 	 */
 	public AddAccountTransaction(AccountManager acctMgr, ICustomer customer) {
-		super(acctMgr);
+		super(acctMgr) ;
 		this.customer = customer;
 	}
 
