@@ -2,14 +2,13 @@ package creditcard.account.factory;
 
 import creditcard.account.GoldCCAccount;
 import framework.account.IAccount;
-import framework.account.factory.AAccountFactory;
+import framework.account.factory.IAccountFactory;
 import framework.customer.ICustomer;
 
-public class GoldCCAccountFactory extends AAccountFactory{
+public class GoldCCAccountFactory implements IAccountFactory {
 
 	@Override
 	public IAccount createAccount(ICustomer iCustomer, String accountNumber) {
-		// TODO Auto-generated method stub
 		return new GoldCCAccount(iCustomer, accountNumber);
 	}
 

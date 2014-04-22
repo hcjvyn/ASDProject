@@ -1,15 +1,15 @@
 package framework.account.factory;
 
+import framework.account.Account;
 import framework.account.IAccount;
 import framework.customer.ICustomer;
 
 
-public class DefaultAccountFactory extends AAccountFactory{
+public class DefaultAccountFactory implements IAccountFactory {
 
 	@Override
 	public IAccount createAccount(ICustomer iCustomer, String accountNumber) {
-		// TODO Auto-generated method stub
-		return null;
+		return new Account(iCustomer, accountNumber);
 	}
 
 }
