@@ -83,8 +83,8 @@ public class AmountDialog extends javax.swing.JDialog {
 	void JButtonOK_actionPerformed(java.awt.event.ActionEvent event)
 	{
 		try {
-			accnr=JLabel1.getText();
-			amount=JLabel2.getText();
+			accnr=JTextField_NAME.getText();
+			amount=JTextField_Deposit.getText();
 			dispose();
 		} catch (Exception e) {
 			// TODO Auto-generated catch block

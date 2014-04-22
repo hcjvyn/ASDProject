@@ -12,9 +12,11 @@ import javax.swing.table.DefaultTableModel;
 import framework.account.AccountManager;
 import framework.customer.ICustomer;
 import framework.transaction.AddAccountTransaction;
+import framework.transaction.ComputeTransaction;
 import framework.transaction.ITransaction;
 import framework.transaction.TransactionManager;
 import framework.ui.actions.SymWindow;
+import framework.operation.*;
 
 public class GUI extends JFrame {
 	protected TransactionManager transactionManager=new TransactionManager();
@@ -159,14 +161,11 @@ public class GUI extends JFrame {
 		    	}
 		    }
 		    
-		    
-		    
-		    // compute new amount
-            long deposit = Long.parseLong(dep.getAmount());
-            String samount = (String)model.getValueAt(selection, 5);
-            long currentamount = Long.parseLong(samount);
-		    long newamount=currentamount+deposit;
-		    model.setValueAt(String.valueOf(newamount),selection, 5);
+		    IOperation addOperation = new AddOperation(Double.parseDouble(dep.getAmount()));
+		    ITransaction transaction = new ComputeTransaction(accountManager, addOperation);
+			TransactionManager transactionManager = new TransactionManager();
+			transactionManager.submit(transaction);
+		    refreshTable();
 		}
 		
 		
