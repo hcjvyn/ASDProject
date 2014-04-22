@@ -154,7 +154,7 @@ public class CardFrm extends GUI
 		TransactionManager transactionManager = new TransactionManager();
 		transactionManager.submit(transaction);
 		
-		refreshTable();
+		fillRowData(customer);
     }
 
 	void GenerateMonthlyBillsButton_actionPerformed(java.awt.event.ActionEvent event)
@@ -213,23 +213,16 @@ public class CardFrm extends GUI
 		
 		
 	}
-	
-	void refreshTable()
+	 
+	public String[] fillRowData(ICustomer customerTemp)
 	{
-		for(int i=0 ; i < model.getRowCount() ; i++)
-			model.removeRow(i);
-		
-		for(int i=0 ; i < accountManager.getCustomerList().size() ; i++)
-		{
-			ICustomer customerTemp = accountManager.getCustomerList().get(i);
-			rowdata[0] = customerTemp.getAccount().getAccountNum();
-			rowdata[1] = customerTemp.getName();
-			rowdata[2] = customerTemp.getCity();
-			rowdata[3] = "Later";
-			rowdata[4] = "Later";
-//			rowdata[5] = "0";
-			model.addRow(rowdata);
-		}
+		String[] rowdata2=new String[6];
+		rowdata2[0] = customerTemp.getName();
+		rowdata2[1] = customerTemp.getAccount().getAccountNum();
+		rowdata2[2] = customerTemp.getAccount().getExpDate().toString();
+		rowdata2[3] = customerTemp.getAccount().getAccountType();
+		rowdata2[4] = Double.toString(customerTemp.getAccount().getBalance());
+		return rowdata;
 	}
 	
 }

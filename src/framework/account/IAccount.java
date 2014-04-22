@@ -1,6 +1,7 @@
 package framework.account;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 import framework.account.entry.IEntry;
 import framework.customer.ICustomer;
@@ -16,4 +17,5 @@ public interface IAccount {
 	public void addEntry(IEntry entry);
 	public ArrayList<IEntry> getEntryList();
 	public double getMinimumPayment();
+	public Date getExpDate();
 }

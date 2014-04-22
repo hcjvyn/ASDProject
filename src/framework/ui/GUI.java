@@ -141,14 +141,29 @@ public class GUI extends JFrame {
 		for(int i=0 ; i < accountManager.getCustomerList().size() ; i++)
 		{
 			ICustomer customerTemp = accountManager.getCustomerList().get(i);
+			/*
 			rowdata[0] = customerTemp.getAccount().getAccountNum();
 			rowdata[1] = customerTemp.getName();
 			rowdata[2] = customerTemp.getCity();
 			rowdata[3] = "Later";
 			rowdata[4] = "Later";
 			rowdata[5] = "0";
-			model.addRow(rowdata);
+			*/
+			
+			model.addRow(fillRowData(customerTemp));
 		}
+	}
+	
+	public String[] fillRowData(ICustomer customerTemp)
+	{
+		String[] rowdata2=new String[6];
+		rowdata2[0] = customerTemp.getAccount().getAccountNum();
+		rowdata2[1] = customerTemp.getName();
+		rowdata2[2] = customerTemp.getCity();
+		rowdata2[3] = "Later";
+		rowdata2[4] = "Later";
+		rowdata2[5] = "0";
+		return rowdata;
 	}
 	
 	//When the Exit button is pressed this code gets executed

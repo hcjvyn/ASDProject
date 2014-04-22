@@ -1,6 +1,7 @@
 package framework.account;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 import framework.account.entry.IEntry;
 import framework.customer.ICustomer;
@@ -66,6 +67,12 @@ public class Account implements IAccount {
 	public double getMinimumPayment() {
 		// TODO Auto-generated method stub
 		return this.minimumPayment;
+	}
+
+	@Override
+	public Date getExpDate() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }
