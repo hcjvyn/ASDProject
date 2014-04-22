@@ -1,5 +1,22 @@
 package framework.operation;
 
+
+import framework.account.IAccount;
+import framework.account.entry.Entry;
+import framework.account.entry.IEntry;
+
 public abstract class AOperation implements IOperation {
-	public abstract void compute();
+	/*protected IAccount account;
+	
+	public AOperation(IAccount account){
+		this.account = account;
+	}*/
+	
+	public abstract void compute(IAccount acct);
+	
+	public void addEntry(IAccount acct, double amount){
+		IEntry entry = new Entry(amount);
+		acct.addEntry(entry);
+		
+	}
 }
