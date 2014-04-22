@@ -11,7 +11,8 @@ public class Account implements IAccount {
 	private String accountNum;
 	private double balance;
 	private ArrayList<IEntry> entryList = new ArrayList<IEntry>();
-
+	
+	protected String accountType;
 	protected double interestRate;
 	
 	public Account(ICustomer customer, String accountNum) {
@@ -47,6 +48,11 @@ public class Account implements IAccount {
 	@Override
 	public double getInterestRate() {
 		return this.interestRate;
+	}
+
+	@Override
+	public String getAccountType() {
+		return accountType;
 	}
 
 }
