@@ -7,7 +7,7 @@ import framework.operation.IOperation;
 
 public class AccountManager {
 	
-	private ArrayList<ICustomer> customerList;
+	private ArrayList<ICustomer> customerList = new ArrayList<ICustomer>();
 	
 	public void addCustomer(ICustomer iCustomer) {
 		customerList.add(iCustomer);
@@ -30,4 +30,5 @@ public class AccountManager {
 	public ArrayList<ICustomer> getCustomerList() {
 		return this.customerList;
 	}
+
 }
