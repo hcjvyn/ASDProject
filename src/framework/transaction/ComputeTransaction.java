@@ -7,25 +7,32 @@ import framework.operation.IOperation;
 public class ComputeTransaction extends ATransaction {
 	
 	private IOperation iOperation;
-	private double amountToBeComputed;
 	private IAccount account;
 	
 	/**
 	 * Initialize all variables.
 	 * @param acctMgr
 	 */
-	public ComputeTransaction(AccountManager acctMgr, IOperation iOperation, double amountToBeComputed, IAccount acct) {
+	public ComputeTransaction(AccountManager acctMgr, IOperation iOperation, IAccount acct) {
 		super(acctMgr);
 		this.iOperation = iOperation;
-		this.amountToBeComputed = amountToBeComputed;
 		this.account = acct;
 	}
-
+	
+	public ComputeTransaction(AccountManager acctMgr, IOperation iOperation) {
+		super(acctMgr);
+		this.iOperation = iOperation;
+	}
 	
 	
 	@Override
 	public void execute() {
-		this.iOperation.compute(account);
+		if (account!=null){
+			this.accountManager.compute(account, iOperation);
+		}else{
+			this.accountManager.computeAll(iOperation);
+		}
+		
 	}
 
 }

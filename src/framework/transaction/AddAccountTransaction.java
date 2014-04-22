@@ -1,7 +1,6 @@
 package framework.transaction;
 
 import framework.account.AccountManager;
-import framework.account.IAccount;
 import framework.customer.ICustomer;
 
 public class AddAccountTransaction extends ATransaction {

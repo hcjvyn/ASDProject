@@ -1,7 +1,6 @@
 package framework.transaction;
 
 import framework.account.AccountManager;
-import framework.account.IAccount;
 
 public abstract class ATransaction implements ITransaction{
 	protected AccountManager accountManager;
