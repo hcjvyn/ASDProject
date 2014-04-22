@@ -25,4 +25,9 @@ public class Customer implements ICustomer {
 		this.account = account;
 	}
 
+	@Override
+	public IAccount getAccount() {
+		return account;
+	}
+
 }

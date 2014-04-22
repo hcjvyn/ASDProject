@@ -5,5 +5,6 @@ import framework.account.IAccount;
 public interface ICustomer {
 	
 	public void addAccount(IAccount account);
+	public IAccount getAccount();
 
 }

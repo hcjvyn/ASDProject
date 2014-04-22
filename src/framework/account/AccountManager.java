@@ -3,28 +3,31 @@ package framework.account;
 import java.util.ArrayList;
 
 import framework.customer.ICustomer;
+import framework.operation.IOperation;
 
 public class AccountManager {
-	protected ArrayList<ICustomer> iCustomerList;
 	
-	public void addCustomer(ICustomer iCustomer)
-	{
-		iCustomerList.add(iCustomer);
+	private ArrayList<ICustomer> customerList;
+	
+	public void addCustomer(ICustomer iCustomer) {
+		customerList.add(iCustomer);
 	}
-	public void removeCustomer(ICustomer iCustomer)
-	{
-		iCustomerList.remove(iCustomer);
+	
+	public void removeCustomer(ICustomer iCustomer) {
+		customerList.remove(iCustomer);
 	}
-	public void compute()
-	{
-		
+	
+	public void compute(IAccount account, IOperation operation) {
+		operation.compute(account);
 	}
-	public void computeAll()
-	{
-		
+	
+	public void computeAll(IOperation operation) {
+		for (ICustomer customer : customerList) {
+			operation.compute(customer.getAccount());
+		}
 	}
-	public ArrayList<ICustomer> getCustomerList()
-	{
-		return this.iCustomerList;
+	
+	public ArrayList<ICustomer> getCustomerList() {
+		return this.customerList;
 	}
 }
