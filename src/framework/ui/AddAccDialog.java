@@ -17,7 +17,7 @@ public class AddAccDialog extends AAddAccDialog {
 		// what Visual Cafe can generate, or Visual Cafe may be unable to back
 		// parse your Java file into its visual environment.
 		//{{INIT_CONTROLS
-		setTitle("Add personal account");
+		setTitle("Add account");
 		setModal(true);
 		getContentPane().setLayout(null);
 		setSize(283,303);

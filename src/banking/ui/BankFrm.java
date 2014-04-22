@@ -8,6 +8,7 @@ import framework.customer.ICustomer;
 import framework.transaction.AddAccountTransaction;
 import framework.transaction.ITransaction;
 import framework.transaction.TransactionManager;
+import framework.ui.AAddAccDialog;
 import framework.ui.AddAccDialog;
 import framework.ui.GUI;
 import framework.ui.actions.SymWindow;
@@ -42,7 +43,6 @@ public class BankFrm extends GUI {
 		addWindowListener(this);
 		SymAction lSymAction = new SymAction();
 		ExitButton.addActionListener(lSymAction);
-		AddAccountButton.addActionListener(lSymAction);
 		AddCompanyAccountButton.addActionListener(lSymAction);
 		DepositButton.addActionListener(lSymAction);
 		WithdrawButton.addActionListener(lSymAction);
@@ -96,20 +96,20 @@ public class BankFrm extends GUI {
 			Object object = event.getSource();
 			if (object == ExitButton)
 				ExitButton_actionPerformed(event);
-			else if (object == AddAccountButton)
-				AddAccountButton_actionPerformed(event, new JDialog_AddPAcc());
 			else if (object == AddCompanyAccountButton)
 				AddAccountButton_actionPerformed(event, new JDialog_AddCompAcc());
-			else if (object == DepositButton)
-				DepositButton_actionPerformed(event);
-			else if (object == WithdrawButton)
-				WithdrawButton_actionPerformed(event);
+			else if (object == DepositButton || object == WithdrawButton)
+				computeActionPerformed(event);
 			else if (object == AddinterestButton)
 				AddinterestButton_actionPerformed(event);
 			
 		}
 	}
 
+	 protected AAddAccDialog getDialog(){
+		  return new JDialog_AddPAcc();
+	 }
+	 
 	void WithdrawButton_actionPerformed(java.awt.event.ActionEvent event)
 	{
 	    // get selected name

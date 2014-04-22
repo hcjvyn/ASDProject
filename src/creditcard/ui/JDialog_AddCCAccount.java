@@ -4,6 +4,10 @@ package creditcard.ui;
 		A basic implementation of the JDialog class.
 */
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import creditcard.account.factory.GoldCCAccountFactory;
 import creditcard.account.factory.PlatinumCCAccountFactory;
 import creditcard.account.factory.SilverCCAccountFactory;
@@ -70,7 +74,6 @@ public class JDialog_AddCCAccount extends AAddAccDialog {
 		JLabelZip.setForeground(java.awt.Color.black);
 		JLabelZip.setBounds(12,204,48,24);
 		
-		JTextField_ACNR.setText("CC number");
 		getContentPane().add(JTextField_ACNR);
 		JTextField_ACNR.setForeground(java.awt.Color.black);
 		JTextField_ACNR.setBounds(12,252,96,24);
@@ -180,6 +183,13 @@ public class JDialog_AddCCAccount extends AAddAccDialog {
 		String city=JTextField_CT.getText();
 		String zip=JTextField_ZIP.getText();
 		String state=JTextField_ST.getText();
+		
+		try {	
+			Date expDate = new SimpleDateFormat("MM/dd/yyyy").parse(JTextField_ExpDate.getText());
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 		return new Customer(
 				clientName,

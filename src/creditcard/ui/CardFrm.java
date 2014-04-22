@@ -4,6 +4,7 @@ import javax.swing.JButton;
 import javax.swing.JOptionPane;
 import javax.swing.UIManager;
 
+import banking.ui.JDialog_AddPAcc;
 import framework.customer.ICustomer;
 import framework.transaction.AddAccountTransaction;
 import framework.transaction.ITransaction;
@@ -30,8 +31,6 @@ public class CardFrm extends GUI {
 		
 		setTitle("Credit-card processing Application.");
 		
-		String[] columnNames= { "Name", "CC number", "Exp date", "Type", "Balance" }; 
-        setTableColumns(columnNames);
         newaccount=false;
         		
 		AddAccountButton.setText("Add Credit-card account");
@@ -45,7 +44,6 @@ public class CardFrm extends GUI {
 		this.addWindowListener(aSymWindow);
 		SymAction lSymAction = new SymAction();
 		ExitButton.addActionListener(lSymAction);
-		AddAccountButton.addActionListener(lSymAction);
 		GenerateMonthlyBillsButton.addActionListener(lSymAction);
 		DepositButton.addActionListener(lSymAction);
 		WithdrawButton.addActionListener(lSymAction);
@@ -121,40 +119,17 @@ public class CardFrm extends GUI {
 			Object object = event.getSource();
 			if (object == ExitButton)
 				ExitButton_actionPerformed(event);
-			else if (object == AddAccountButton)
-				AddAccountButton_actionPerformed(event);
 			else if (object == GenerateMonthlyBillsButton)
 				GenerateMonthlyBillsButton_actionPerformed(event);
-			else if (object == DepositButton)
-				DepositButton_actionPerformed(event);
-			else if (object == WithdrawButton)
-				WithdrawButton_actionPerformed(event);
+			else if (object == DepositButton || object == WithdrawButton)
+				computeActionPerformed(event);
 			
 		}
 	}
-    
-   
-
-	void AddAccountButton_actionPerformed(java.awt.event.ActionEvent event)
-	{
-		/*
-		 JDialog_AddPAcc type object is for adding personal information
-		 construct a JDialog_AddPAcc type object 
-		 set the boundaries and show it 
-		*/
-		
-		AAddAccDialog ccac = new JDialog_AddCCAccount();
-		ccac.setBounds(450, 20, 300, 380);
-		ccac.show();
-
-		ICustomer customer = ccac.getCustomer();
-		
-		ITransaction transaction = new AddAccountTransaction(accountManager, customer);
-		TransactionManager transactionManager = new TransactionManager();
-		transactionManager.submit(transaction);
-		
-		fillRowData(customer);
-    }
+	
+	 protected AAddAccDialog getDialog(){
+		  return new JDialog_AddCCAccount();
+		 }
 
 	void GenerateMonthlyBillsButton_actionPerformed(java.awt.event.ActionEvent event)
 	{
@@ -163,65 +138,19 @@ public class CardFrm extends GUI {
 		billFrm.show();
 	    
 	}
-
-	/*void DepositButton_actionPerformed(java.awt.event.ActionEvent event)
-	{
-	    // get selected name
-        int selection = JTable1.getSelectionModel().getMinSelectionIndex();
-        if (selection >=0){
-            String name = (String)model.getValueAt(selection, 0);
-    	    
-		    //Show the dialog for adding deposit amount for the current mane
-		    JDialog_Deposit dep = new JDialog_Deposit(thisframe,name);
-		    dep.setBounds(430, 15, 275, 140);
-		    dep.show();
-    		
-		    // compute new amount
-            long deposit = Long.parseLong(amountDeposit);
-            String samount = (String)model.getValueAt(selection, 4);
-            long currentamount = Long.parseLong(samount);
-		    long newamount=currentamount+deposit;
-		    model.setValueAt(String.valueOf(newamount),selection, 4);
-		}
-		
-		
-	}*/
-
-	void WithdrawButton_actionPerformed(java.awt.event.ActionEvent event)
-	{
-	    // get selected name
-        int selection = JTable1.getSelectionModel().getMinSelectionIndex();
-        if (selection >=0){
-            String name = (String)model.getValueAt(selection, 0);
-
-		    //Show the dialog for adding withdraw amount for the current mane
-		    JDialog_Withdraw wd = new JDialog_Withdraw(thisframe,name);
-		    wd.setBounds(430, 15, 275, 140);
-		    wd.show();
-    		
-		    // compute new amount
-            long deposit = Long.parseLong(amountDeposit);
-            String samount = (String)model.getValueAt(selection, 4);
-            long currentamount = Long.parseLong(samount);
-		    long newamount=currentamount-deposit;
-		    model.setValueAt(String.valueOf(newamount),selection, 4);
-		    if (newamount <0){
-		       JOptionPane.showMessageDialog(WithdrawButton, " "+name+" Your balance is negative: $"+String.valueOf(newamount)+" !","Warning: negative balance",JOptionPane.WARNING_MESSAGE);
-		    }
-		}
-		
-		
-	}
 	 
 	public String[] fillRowData(ICustomer customerTemp)
 	{
-		String[] rowdata2=new String[6];
+		String[] rowdata2=new String[5];
 		rowdata2[0] = customerTemp.getName();
 		rowdata2[1] = customerTemp.getAccount().getAccountNum();
-		rowdata2[2] = customerTemp.getAccount().getExpDate().toString();
+		if(customerTemp.getAccount().getExpDate() != null)
+			rowdata2[2] = customerTemp.getAccount().getExpDate().toString();
+		else
+			rowdata2[2] = "";
 		rowdata2[3] = customerTemp.getAccount().getAccountType();
 		rowdata2[4] = Double.toString(customerTemp.getAccount().getBalance());
-		return rowdata;
+		return rowdata2;
 	}
 	
 }

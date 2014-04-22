@@ -108,16 +108,20 @@ public class GUI extends JFrame {
 			if (object == ExitButton)
 				ExitButton_actionPerformed(event);
 			else if (object == AddAccountButton)
-				AddAccountButton_actionPerformed(event, new AddAccDialog());
+			    AddAccountButton_actionPerformed(event, getDialog());
 			else if (object == DepositButton)
-				DepositButton_actionPerformed(event);
-			/*else if (object == WithdrawButton)
-				WithdrawButton_actionPerformed(event);
-			else if (object == AddinterestButton)
+				computeActionPerformed(event);
+			else if (object == WithdrawButton)
+				computeActionPerformed(event);
+			/*else if (object == AddinterestButton)
 				AddinterestButton_actionPerformed(event);*/
 			
 		}
 	}
+	
+	protected AAddAccDialog getDialog(){
+		  return new AddAccDialog();
+		 }
 	
 	protected void AddAccountButton_actionPerformed(java.awt.event.ActionEvent event, AAddAccDialog pac)
 	{
@@ -139,10 +143,9 @@ public class GUI extends JFrame {
 		refreshTable();
     }
 	
-	protected void DepositButton_actionPerformed(java.awt.event.ActionEvent event)
+	protected void computeActionPerformed(java.awt.event.ActionEvent event)
 	{
-	    // get selected name
-        int selection = JTable1.getSelectionModel().getMinSelectionIndex();
+		int selection = JTable1.getSelectionModel().getMinSelectionIndex();
         if (selection >=0){
             String accnr = (String)model.getValueAt(selection, 0);
     	    
@@ -150,25 +153,21 @@ public class GUI extends JFrame {
 		    AmountDialog dep = new AmountDialog(accnr, "Deposit");
 		    dep.setBounds(430, 15, 275, 140);
 		    dep.show();
-    		
-		    ICustomer iCustomerTemp=null;
-		    for(int i=0 ; i < accountManager.getCustomerList().size() ; i++)
-		    {
-		    	if(accountManager.getCustomerList().get(i).getAccount().getAccountNum() == dep.getAccountNumber())
-		    	{
-		    		iCustomerTemp=accountManager.getCustomerList().get(i);
-		    		break;
-		    	}
-		    }
+   
 		    
-		    IOperation addOperation = new AddOperation(Double.parseDouble(dep.getAmount()));
-		    ITransaction transaction = new ComputeTransaction(accountManager, addOperation);
+		    ICustomer iCustomerTemp=accountManager.findCustomerByAccountNumber(dep.getAccountNumber());
+		    System.out.println(iCustomerTemp);
+		    
+		    IOperation addOperation=null;
+		    if (event.getSource() == DepositButton)
+		    	addOperation = new AddOperation(Double.parseDouble(dep.getAmount()));
+			else if (event.getSource() == WithdrawButton)
+				addOperation = new SubtractOperation(Double.parseDouble(dep.getAmount()));
+		    ITransaction transaction = new ComputeTransaction(accountManager, addOperation, iCustomerTemp.getAccount());
 			TransactionManager transactionManager = new TransactionManager();
 			transactionManager.submit(transaction);
 		    refreshTable();
 		}
-		
-		
 	}
 	
 	void refreshTable()
@@ -183,7 +182,7 @@ public class GUI extends JFrame {
 		}
 	}
 	
-	public String[] fillRowData(ICustomer customerTemp)
+	protected String[] fillRowData(ICustomer customerTemp)
 	{
 		String[] rowdata2=new String[6];
 		rowdata2[0] = customerTemp.getAccount().getAccountNum();

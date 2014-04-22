@@ -31,4 +31,17 @@ public class AccountManager {
 		return this.customerList;
 	}
 
+	public ICustomer findCustomerByAccountNumber(String accountNumber)
+	{
+		System.out.println(customerList.size());
+		for(int i=0 ; i < customerList.size() ; i++)
+	    {
+			if(customerList.get(i).getAccount().getAccountNum().equals(accountNumber))
+	    	{
+	    		return customerList.get(i);
+	    	}
+	    }
+		return null;
+	}
+
 }

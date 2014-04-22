@@ -20,7 +20,7 @@ public class SubtractOperation extends AOperation{
 	 */
 	@Override
 	public void compute(IAccount acct) {
-		double newAmt = acct.getBalance()+amount;
+		double newAmt = acct.getBalance()-amount;
 		acct.setBalance(newAmt);
 		addEntry(acct,amount,ENTRY_TYPE);
 	}
