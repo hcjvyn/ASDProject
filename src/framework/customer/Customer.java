@@ -30,4 +30,29 @@ public class Customer implements ICustomer {
 		return account;
 	}
 
+	@Override
+	public String getName() {
+		return name;
+	}
+
+	@Override
+	public String getStreet() {
+		return street;
+	}
+
+	@Override
+	public String getCity() {
+		return city;
+	}
+
+	@Override
+	public String getState() {
+		return state;
+	}
+
+	@Override
+	public String getZip() {
+		return zip;
+	}
+
 }
