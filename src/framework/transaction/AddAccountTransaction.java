@@ -1,11 +1,25 @@
 package framework.transaction;
 
-public class AddAccountTransaction extends ATransaction {
+import framework.account.AccountManager;
+import framework.account.IAccount;
+import framework.customer.ICustomer;
 
-	@Override
-	public void execute() {
-		// TODO Auto-generated method stub
-		
+public class AddAccountTransaction extends ATransaction {
+	private ICustomer customer;
+
+	/**
+	 * Initialize all variables.
+	 * @param acctMgr
+	 */
+	public AddAccountTransaction(AccountManager acctMgr, ICustomer customer) {
+		super(acctMgr);
+		this.customer = customer;
 	}
 
+	@Override
+	public void execute(IAccount acct) {
+		accountManager.addCustomer(customer);
+	}
+
+	
 }

@@ -1,5 +1,7 @@
 package framework.transaction;
 
+import framework.account.IAccount;
+
 public interface ITransaction {
-	public void execute();
+	public void execute(IAccount acct);
 }
