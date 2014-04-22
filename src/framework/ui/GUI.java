@@ -66,6 +66,9 @@ public class GUI extends JFrame {
 		ExitButton.setText("Exit");
 		ExitButton.setBounds(468,248,96,31);
 		JPanel1.add(ExitButton);
+		
+		String[] columnNames= { "AccountNr", "Name", "City", "P/C", "Ch/S", "Amount" };
+        setTableColumns(columnNames);
 	}
 	
 	public void setTableColumns(String[] columnNames)
