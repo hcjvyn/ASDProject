@@ -27,7 +27,7 @@ public class ComputeTransaction extends ATransaction {
 	
 	@Override
 	public void execute() {
-		if (account!=null){
+		if (account!=null) {
 			this.accountManager.compute(account, iOperation);
 		}else{
 			this.accountManager.computeAll(iOperation);
