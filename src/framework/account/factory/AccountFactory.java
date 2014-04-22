@@ -5,7 +5,7 @@ import framework.account.IAccount;
 import framework.customer.ICustomer;
 
 
-public class DefaultAccountFactory implements IAccountFactory {
+public class AccountFactory implements IAccountFactory {
 
 	@Override
 	public IAccount createAccount(ICustomer iCustomer, String accountNumber) {
