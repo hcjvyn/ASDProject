@@ -1,35 +1,25 @@
 package banking.ui;
 
-import java.util.Vector;
+import javax.swing.JOptionPane;
+import javax.swing.UIManager;
 
-import javax.swing.*;
-
-import framework.account.*;
-import framework.account.factory.*;
-import framework.customer.*;
-import framework.transaction.*;
+import framework.customer.ICustomer;
+import framework.transaction.AddAccountTransaction;
+import framework.transaction.ITransaction;
+import framework.transaction.TransactionManager;
+import framework.ui.AddAccDialog;
 import framework.ui.GUI;
 
 /**
  * A basic JFC based application.
  */
-public class BankFrm extends GUI
-{
+public class BankFrm extends GUI {
 
 	javax.swing.JButton AddCompanyAccountButton = new javax.swing.JButton();
 	javax.swing.JButton AddinterestButton = new javax.swing.JButton();
-	
-    /****
-     * init variables in the object
-     ****/
-    String accountnr, clientName,street,city,zip,state,accountType,clientType,amountDeposit;
-    boolean newaccount;
-    BankFrm myframe;
     
 	public BankFrm()
 	{
-		myframe = this;
-
 		setTitle("Bank Application.");
 		
         JPanel1.add(JScrollPane1);
@@ -38,7 +28,6 @@ public class BankFrm extends GUI
         
         String[] columnNames= { "AccountNr", "Name", "City", "P/C", "Ch/S", "Amount" };
         setTableColumns(columnNames);
-        newaccount=false;
         
         AddAccountButton.setText("Add personal account");
         
@@ -161,36 +150,17 @@ public class BankFrm extends GUI
 		 set the boundaries and show it 
 		*/
 		
-		JDialog_AddPAcc pac = new JDialog_AddPAcc(myframe);
+		AddAccDialog pac = new JDialog_AddPAcc();
 		pac.setBounds(450, 20, 300, 330);
 		pac.show();
 		
-		ICustomer iCustomer = new Customer(clientName,street,city,state,zip);
-		IAccountFactory iAccountFactory = new DefaultAccountFactory();
-		IAccount iAccount = iAccountFactory.createAccount(iCustomer, accountnr);
-		iCustomer.addAccount(iAccount);
-		ITransaction iTransaction = new AddAccountTransaction(accountManager, iCustomer);
+		ICustomer customer = pac.getCustomer();
+		
+		ITransaction transaction = new AddAccountTransaction(accountManager, customer);
 		TransactionManager transactionManager = new TransactionManager();
-		transactionManager.submit(iTransaction);
+		transactionManager.submit(transaction);
 		
-		/*
-		if (newaccount){
-            // add row to table
-            rowdata[0] = accountnr;
-            rowdata[1] = clientName;
-            rowdata[2] = city;
-            rowdata[3] = "P";
-            rowdata[4] = accountType;
-            rowdata[5] = "0";
-            model.addRow(rowdata);
-            JTable1.getSelectionModel().setAnchorSelectionIndex(-1);
-            newaccount=false;
-        }
-		*/
 		refreshTable();
-		
-       
-        
     }
 
 	void AddCompanyAccountButton_actionPerformed(java.awt.event.ActionEvent event)
@@ -201,23 +171,17 @@ public class BankFrm extends GUI
 		 show it 
 		*/
 		
-		JDialog_AddCompAcc pac = new JDialog_AddCompAcc(myframe);
+		JDialog_AddCompAcc pac = new JDialog_AddCompAcc();
 		pac.setBounds(450, 20, 300, 330);
 		pac.show();
 		
-		if (newaccount){
-            // add row to table
-            rowdata[0] = accountnr;
-            rowdata[1] = clientName;
-            rowdata[2] = city;
-            rowdata[3] = "C";
-            rowdata[4] = accountType;
-            rowdata[5] = "0";
-            model.addRow(rowdata);
-            JTable1.getSelectionModel().setAnchorSelectionIndex(-1);
-            newaccount=false;
-        }
+		ICustomer customer = pac.getCustomer();
+		
+		ITransaction transaction = new AddAccountTransaction(accountManager, customer);
+		TransactionManager transactionManager = new TransactionManager();
+		transactionManager.submit(transaction);
 
+		refreshTable();
 	}
 
 	void DepositButton_actionPerformed(java.awt.event.ActionEvent event)
@@ -228,12 +192,12 @@ public class BankFrm extends GUI
             String accnr = (String)model.getValueAt(selection, 0);
     	    
 		    //Show the dialog for adding deposit amount for the current mane
-		    JDialog_Deposit dep = new JDialog_Deposit(myframe,accnr);
+		    JDialog_Deposit dep = new JDialog_Deposit(accnr);
 		    dep.setBounds(430, 15, 275, 140);
 		    dep.show();
     		
 		    // compute new amount
-            long deposit = Long.parseLong(amountDeposit);
+            long deposit = Long.parseLong(dep.getAmount());
             String samount = (String)model.getValueAt(selection, 5);
             long currentamount = Long.parseLong(samount);
 		    long newamount=currentamount+deposit;
@@ -251,12 +215,12 @@ public class BankFrm extends GUI
             String accnr = (String)model.getValueAt(selection, 0);
 
 		    //Show the dialog for adding withdraw amount for the current mane
-		    JDialog_Withdraw wd = new JDialog_Withdraw(myframe,accnr);
+		    JDialog_Withdraw wd = new JDialog_Withdraw(accnr);
 		    wd.setBounds(430, 15, 275, 140);
 		    wd.show();
     		
 		    // compute new amount
-            long deposit = Long.parseLong(amountDeposit);
+            long deposit = Long.parseLong(wd.getAmount());
             String samount = (String)model.getValueAt(selection, 5);
             long currentamount = Long.parseLong(samount);
 		    long newamount=currentamount-deposit;
