@@ -1,11 +1,14 @@
 package framework.ui;
 
-import java.awt.*;
+import java.awt.BorderLayout;
 
-import javax.swing.*;
-import javax.swing.table.*;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
 
-import banking.ui.JDialog_AddPAcc;
 import framework.account.AccountManager;
 import framework.customer.ICustomer;
 import framework.transaction.AddAccountTransaction;
@@ -104,9 +107,9 @@ public class GUI extends JFrame {
 				ExitButton_actionPerformed(event);
 			else if (object == AddAccountButton)
 				AddAccountButton_actionPerformed(event, new AddAccDialog());
-			/*else if (object == DepositButton)
+			else if (object == DepositButton)
 				DepositButton_actionPerformed(event);
-			else if (object == WithdrawButton)
+			/*else if (object == WithdrawButton)
 				WithdrawButton_actionPerformed(event);
 			else if (object == AddinterestButton)
 				AddinterestButton_actionPerformed(event);*/
@@ -114,7 +117,7 @@ public class GUI extends JFrame {
 		}
 	}
 	
-	protected void AddAccountButton_actionPerformed(java.awt.event.ActionEvent event, AddAccDialog pac)
+	protected void AddAccountButton_actionPerformed(java.awt.event.ActionEvent event, AAddAccDialog pac)
 	{
 		/*
 		 JDialog_AddPAcc type object is for adding personal information
@@ -133,6 +136,41 @@ public class GUI extends JFrame {
 		transactionManager.submit(transaction);
 		refreshTable();
     }
+	
+	void DepositButton_actionPerformed(java.awt.event.ActionEvent event)
+	{
+	    // get selected name
+        int selection = JTable1.getSelectionModel().getMinSelectionIndex();
+        if (selection >=0){
+            String accnr = (String)model.getValueAt(selection, 0);
+    	    
+		    //Show the dialog for adding deposit amount for the current mane
+		    AmountDialog dep = new AmountDialog(accnr, "Deposit");
+		    dep.setBounds(430, 15, 275, 140);
+		    dep.show();
+    		
+		    ICustomer iCustomerTemp=null;
+		    for(int i=0 ; i < accountManager.getCustomerList().size() ; i++)
+		    {
+		    	if(accountManager.getCustomerList().get(i).getAccount().getAccountNum() == dep.getAccountNumber())
+		    	{
+		    		iCustomerTemp=accountManager.getCustomerList().get(i);
+		    		break;
+		    	}
+		    }
+		    
+		    
+		    
+		    // compute new amount
+            long deposit = Long.parseLong(dep.getAmount());
+            String samount = (String)model.getValueAt(selection, 5);
+            long currentamount = Long.parseLong(samount);
+		    long newamount=currentamount+deposit;
+		    model.setValueAt(String.valueOf(newamount),selection, 5);
+		}
+		
+		
+	}
 	
 	void refreshTable()
 	{
