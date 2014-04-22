@@ -11,7 +11,7 @@ import javax.swing.JFrame;
 
 public class SymWindow extends java.awt.event.WindowAdapter
 {
-	private JFrame frame;
+	private JFrame frame ;
 	public SymWindow(JFrame frame){
 		this.frame = frame;
 	}
