@@ -18,11 +18,11 @@ public abstract class AAddAccDialog extends JDialog {
 		//}}
 	}
 	
-	protected javax.swing.JLabel JLabel1 = new javax.swing.JLabel();
-	protected javax.swing.JLabel JLabel2 = new javax.swing.JLabel();
-	protected javax.swing.JLabel JLabel3 = new javax.swing.JLabel();
-	protected javax.swing.JLabel JLabel4 = new javax.swing.JLabel();
-	protected javax.swing.JLabel JLabel5 = new javax.swing.JLabel();
+	protected javax.swing.JLabel JLabelName = new javax.swing.JLabel();
+	protected javax.swing.JLabel JLabelStreet = new javax.swing.JLabel();
+	protected javax.swing.JLabel JLabelCity = new javax.swing.JLabel();
+	protected javax.swing.JLabel JLabelState = new javax.swing.JLabel();
+	protected javax.swing.JLabel JLabelZip = new javax.swing.JLabel();
 	
 	protected javax.swing.JTextField JTextField_NAME = new javax.swing.JTextField();
 	protected javax.swing.JTextField JTextField_CT = new javax.swing.JTextField();
@@ -30,8 +30,8 @@ public abstract class AAddAccDialog extends JDialog {
 	protected javax.swing.JTextField JTextField_STR = new javax.swing.JTextField();
 	protected javax.swing.JTextField JTextField_ZIP = new javax.swing.JTextField();
 	
+	protected javax.swing.JLabel JLabelAcnr = new javax.swing.JLabel();
 	protected javax.swing.JTextField JTextField_ACNR = new javax.swing.JTextField();
-	protected javax.swing.JLabel JLabel8 = new javax.swing.JLabel();
 	
 	protected javax.swing.JButton JButton_OK = new javax.swing.JButton();
 	protected javax.swing.JButton JButton_Cancel = new javax.swing.JButton();

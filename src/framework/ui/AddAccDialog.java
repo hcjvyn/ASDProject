@@ -7,6 +7,7 @@ import framework.customer.ICustomer;
 
 public class AddAccDialog extends AAddAccDialog {
 
+
 	public AddAccDialog() {
 		super();
 
@@ -22,30 +23,30 @@ public class AddAccDialog extends AAddAccDialog {
 		setSize(283,303);
 		setVisible(false);
 
-		JLabel1.setText("Name");
-		getContentPane().add(JLabel1);
-		JLabel1.setForeground(java.awt.Color.black);
-		JLabel1.setBounds(12,84,48,24);
+		JLabelName.setText("Name");
+		getContentPane().add(JLabelName);
+		JLabelName.setForeground(java.awt.Color.black);
+		JLabelName.setBounds(12,84,48,24);
 
-		JLabel2.setText("Street");
-		getContentPane().add(JLabel2);
-		JLabel2.setForeground(java.awt.Color.black);
-		JLabel2.setBounds(12,108,48,24);
+		JLabelStreet.setText("Street");
+		getContentPane().add(JLabelStreet);
+		JLabelStreet.setForeground(java.awt.Color.black);
+		JLabelStreet.setBounds(12,108,48,24);
 
-		JLabel3.setText("City");
-		getContentPane().add(JLabel3);
-		JLabel3.setForeground(java.awt.Color.black);
-		JLabel3.setBounds(12,132,48,24);
+		JLabelCity.setText("City");
+		getContentPane().add(JLabelCity);
+		JLabelCity.setForeground(java.awt.Color.black);
+		JLabelCity.setBounds(12,132,48,24);
 
-		JLabel4.setText("State");
-		getContentPane().add(JLabel4);
-		JLabel4.setForeground(java.awt.Color.black);
-		JLabel4.setBounds(12,156,48,24);
+		JLabelState.setText("State");
+		getContentPane().add(JLabelState);
+		JLabelState.setForeground(java.awt.Color.black);
+		JLabelState.setBounds(12,156,48,24);
 
-		JLabel5.setText("Zip");
-		getContentPane().add(JLabel5);
-		JLabel5.setForeground(java.awt.Color.black);
-		JLabel5.setBounds(12,180,48,24);
+		JLabelZip.setText("Zip");
+		getContentPane().add(JLabelZip);
+		JLabelZip.setForeground(java.awt.Color.black);
+		JLabelZip.setBounds(12,180,48,24);
 
 		getContentPane().add(JTextField_NAME);
 		JTextField_NAME.setBounds(84,84,156,20);
@@ -70,11 +71,11 @@ public class AddAccDialog extends AAddAccDialog {
 
 		getContentPane().add(JTextField_ACNR);
 		JTextField_ACNR.setBounds(84,60,156,20);
-		JLabel8.setText("Acc Nr");
-		getContentPane().add(JLabel8);
+		JLabelAcnr.setText("Acc Nr");
+		getContentPane().add(JLabelAcnr);
 
-		JLabel8.setForeground(java.awt.Color.black);
-		JLabel8.setBounds(12,60,48,24);
+		JLabelAcnr.setForeground(java.awt.Color.black);
+		JLabelAcnr.setBounds(12,60,48,24);
 		//}}
 	}
 	

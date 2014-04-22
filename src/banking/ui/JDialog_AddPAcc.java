@@ -7,17 +7,16 @@ import java.util.Date;
 import banking.account.factory.CheckingAccountFactory;
 import banking.account.factory.SavingAccountFactory;
 import banking.customer.Person;
-import framework.account.IAccount;
 import framework.account.factory.IAccountFactory;
 import framework.customer.ICustomer;
-import framework.ui.AddAccDialog;
+import framework.ui.AAddAccDialog;
 
 /*
 		A basic implementation of the JDialog class.
 */
 
 
-public class JDialog_AddPAcc extends AddAccDialog {
+public class JDialog_AddPAcc extends AAddAccDialog {
 	
     public JDialog_AddPAcc()
 	{
@@ -43,40 +42,40 @@ public class JDialog_AddPAcc extends AddAccDialog {
 		getContentPane().add(JRadioButton_Sav);
 		JRadioButton_Sav.setBounds(36,24,84,24);
 		
-		JLabel1.setText("Name");
-		getContentPane().add(JLabel1);
-		JLabel1.setForeground(java.awt.Color.black);
-		JLabel1.setBounds(12,84,48,24);
+		JLabelName.setText("Name");
+		getContentPane().add(JLabelName);
+		JLabelName.setForeground(java.awt.Color.black);
+		JLabelName.setBounds(12,84,48,24);
 		
-		JLabel2.setText("Street");
-		getContentPane().add(JLabel2);
-		JLabel2.setForeground(java.awt.Color.black);
-		JLabel2.setBounds(12,108,48,24);
+		JLabelStreet.setText("Street");
+		getContentPane().add(JLabelStreet);
+		JLabelStreet.setForeground(java.awt.Color.black);
+		JLabelStreet.setBounds(12,108,48,24);
 		
-		JLabel3.setText("City");
-		getContentPane().add(JLabel3);
-		JLabel3.setForeground(java.awt.Color.black);
-		JLabel3.setBounds(12,132,48,24);
+		JLabelCity.setText("City");
+		getContentPane().add(JLabelCity);
+		JLabelCity.setForeground(java.awt.Color.black);
+		JLabelCity.setBounds(12,132,48,24);
 		
-		JLabel4.setText("State");
-		getContentPane().add(JLabel4);
-		JLabel4.setForeground(java.awt.Color.black);
-		JLabel4.setBounds(12,156,48,24);
+		JLabelState.setText("State");
+		getContentPane().add(JLabelState);
+		JLabelState.setForeground(java.awt.Color.black);
+		JLabelState.setBounds(12,156,48,24);
 		
-		JLabel5.setText("Zip");
-		getContentPane().add(JLabel5);
-		JLabel5.setForeground(java.awt.Color.black);
-		JLabel5.setBounds(12,180,48,24);
+		JLabelZip.setText("Zip");
+		getContentPane().add(JLabelZip);
+		JLabelZip.setForeground(java.awt.Color.black);
+		JLabelZip.setBounds(12,180,48,24);
 		
-		JLabel6.setText("Birthdate");
-		getContentPane().add(JLabel6);
-		JLabel6.setForeground(java.awt.Color.black);
-		JLabel6.setBounds(12,204,96,24);
+		JLabelBday.setText("Birthdate");
+		getContentPane().add(JLabelBday);
+		JLabelBday.setForeground(java.awt.Color.black);
+		JLabelBday.setBounds(12,204,96,24);
 		
-		JLabel7.setText("Email");
-		getContentPane().add(JLabel7);
-		JLabel7.setForeground(java.awt.Color.black);
-		JLabel7.setBounds(12,228,48,24);
+		JLabelEmail.setText("Email");
+		getContentPane().add(JLabelEmail);
+		JLabelEmail.setForeground(java.awt.Color.black);
+		JLabelEmail.setBounds(12,228,48,24);
 		
 		getContentPane().add(JTextField_NAME);
 		JTextField_NAME.setBounds(84,84,156,20);
@@ -105,47 +104,29 @@ public class JDialog_AddPAcc extends AddAccDialog {
 		
 		getContentPane().add(JTextField_ACNR);
 		JTextField_ACNR.setBounds(84,60,156,20);
-		JLabel8.setText("Acc Nr");
-		getContentPane().add(JLabel8);
+		JLabelAcnr.setText("Acc Nr");
+		getContentPane().add(JLabelAcnr);
 		
-		JLabel8.setForeground(java.awt.Color.black);
-		JLabel8.setBounds(12,60,48,24);
+		JLabelAcnr.setForeground(java.awt.Color.black);
+		JLabelAcnr.setBounds(12,60,48,24);
 		//}}
 	
 		//{{REGISTER_LISTENERS
 		SymMouse aSymMouse = new SymMouse();
 		JRadioButton_Chk.addMouseListener(aSymMouse);
 		JRadioButton_Sav.addMouseListener(aSymMouse);
-		SymAction lSymAction = new SymAction();
-		JButton_OK.addActionListener(lSymAction);
-		JButton_Cancel.addActionListener(lSymAction);
 		//}}
 	}
-
-
-
 
 	//{{DECLARE_CONTROLS
 	javax.swing.JRadioButton JRadioButton_Chk = new javax.swing.JRadioButton();
 	javax.swing.JRadioButton JRadioButton_Sav = new javax.swing.JRadioButton();
-	javax.swing.JLabel JLabel1 = new javax.swing.JLabel();
-	javax.swing.JLabel JLabel2 = new javax.swing.JLabel();
-	javax.swing.JLabel JLabel3 = new javax.swing.JLabel();
-	javax.swing.JLabel JLabel4 = new javax.swing.JLabel();
-	javax.swing.JLabel JLabel5 = new javax.swing.JLabel();
-	javax.swing.JLabel JLabel6 = new javax.swing.JLabel();
-	javax.swing.JLabel JLabel7 = new javax.swing.JLabel();
-	javax.swing.JTextField JTextField_NAME = new javax.swing.JTextField();
-	javax.swing.JTextField JTextField_CT = new javax.swing.JTextField();
-	javax.swing.JTextField JTextField_ST = new javax.swing.JTextField();
-	javax.swing.JTextField JTextField_STR = new javax.swing.JTextField();
-	javax.swing.JTextField JTextField_ZIP = new javax.swing.JTextField();
+	
+	javax.swing.JLabel JLabelBday = new javax.swing.JLabel();
+	javax.swing.JLabel JLabelEmail = new javax.swing.JLabel();
+	
 	javax.swing.JTextField JTextField_BD = new javax.swing.JTextField();
 	javax.swing.JTextField JTextField_EM = new javax.swing.JTextField();
-	javax.swing.JButton JButton_OK = new javax.swing.JButton();
-	javax.swing.JButton JButton_Cancel = new javax.swing.JButton();
-	javax.swing.JTextField JTextField_ACNR = new javax.swing.JTextField();
-	javax.swing.JLabel JLabel8 = new javax.swing.JLabel();
 	//}}
 
 
@@ -161,7 +142,7 @@ public class JDialog_AddPAcc extends AddAccDialog {
 		}
 	}
 
-	void JRadioButtonChk_mouseClicked(java.awt.event.MouseEvent event)
+	private void JRadioButtonChk_mouseClicked(java.awt.event.MouseEvent event)
 	{
 		//When Checking radio is clicked make this radio on 
 		//and make Saving account radio off
@@ -169,7 +150,7 @@ public class JDialog_AddPAcc extends AddAccDialog {
 		JRadioButton_Sav.setSelected(false);
 	}
 
-	void JRadioButtonSav_mouseClicked(java.awt.event.MouseEvent event)
+	private void JRadioButtonSav_mouseClicked(java.awt.event.MouseEvent event)
 	{
 		//When Saving radio is clicked make this radio on 
 		//and make Checking account radio off
@@ -178,22 +159,9 @@ public class JDialog_AddPAcc extends AddAccDialog {
 	 
 	}
 
-	class SymAction implements java.awt.event.ActionListener
-	{
-		public void actionPerformed(java.awt.event.ActionEvent event)
-		{
-			Object object = event.getSource();
-			if (object == JButton_OK)
-				JButtonOK_actionPerformed(event);
-			else if (object == JButton_Cancel)
-				JButtonCalcel_actionPerformed(event);
-		}
-	}
-
-	void JButtonOK_actionPerformed(java.awt.event.ActionEvent event)
-	{
+	@Override
+	protected ICustomer createCustomer() {
 		try {
-			String accountnr = JTextField_ACNR.getText();
 			String clientName = JTextField_NAME.getText();
 			String street = JTextField_STR.getText();
 			String city = JTextField_CT.getText();
@@ -201,34 +169,26 @@ public class JDialog_AddPAcc extends AddAccDialog {
 			String state = JTextField_ST.getText();
 			Date birthDate = new SimpleDateFormat("MM/dd/yyyy").parse(JTextField_BD.getText());
 			
-			customer = new Person(
+			return new Person(
 					clientName,
 					street,
 					city,
 					state,
 					zip,
 					birthDate);
-			
-			IAccountFactory iAccountFactory = null;
-			if (JRadioButton_Chk.isSelected())
-				iAccountFactory = new CheckingAccountFactory();
-			else
-				iAccountFactory = new SavingAccountFactory();
-			
-			IAccount iAccount = iAccountFactory.createAccount(customer, accountnr);
-			customer.addAccount(iAccount);
-			
-			dispose();
 		} catch (ParseException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+			return null;
 		}
 	}
 
-	void JButtonCalcel_actionPerformed(java.awt.event.ActionEvent event)
-	{
-    //make this frame invisible if Cancel button is clicked
-        dispose();
+	@Override
+	protected IAccountFactory selectFactory() {
+		if (JRadioButton_Chk.isSelected())
+			return new CheckingAccountFactory();
+		else
+			return new SavingAccountFactory();
 	}
 
 }
