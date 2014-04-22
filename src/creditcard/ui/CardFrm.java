@@ -161,7 +161,7 @@ public class CardFrm extends GUI
 
 	void GenerateMonthlyBillsButton_actionPerformed(java.awt.event.ActionEvent event)
 	{
-		JDialogGenBill billFrm = new JDialogGenBill();
+		JDialogGenBill billFrm = new JDialogGenBill(this, accountManager);
 		billFrm.setBounds(450, 20, 400, 350);
 		billFrm.show();
 	    
