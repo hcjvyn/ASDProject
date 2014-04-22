@@ -9,9 +9,9 @@ import framework.account.AccountManager;
 import framework.transaction.TransactionManager;
 
 public class GUI extends JFrame {
-	protected TransactionManager transactionManager;
+	protected TransactionManager transactionManager=new TransactionManager();
 	private DialogBox dialogManager;
-	protected AccountManager accountManager;
+	protected AccountManager accountManager=new AccountManager();
 	
 	protected JPanel JPanel1 = new JPanel();
 	protected JButton AddAccountButton = new JButton();

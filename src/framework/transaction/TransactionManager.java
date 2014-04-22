@@ -3,7 +3,7 @@ package framework.transaction;
 import java.util.ArrayList;
 
 public class TransactionManager {
-	private ArrayList<ITransaction> iTransactionList;
+	private ArrayList<ITransaction> iTransactionList=new ArrayList<ITransaction>();
 	
 	public void submit(ITransaction iTransaction)
 	{

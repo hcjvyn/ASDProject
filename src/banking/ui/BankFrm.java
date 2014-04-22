@@ -281,6 +281,15 @@ public class BankFrm extends GUI
 			model.removeRow(i);
 		
 		for(int i=0 ; i < accountManager.getCustomerList().size() ; i++)
-			model.addRow((Vector) accountManager.getCustomerList().get(i));
+		{
+			ICustomer customerTemp = accountManager.getCustomerList().get(i);
+			rowdata[0] = customerTemp.getAccount().getAccountNum();
+			rowdata[1] = customerTemp.getName();
+			rowdata[2] = customerTemp.getCity();
+			rowdata[3] = "Later";
+			rowdata[4] = "Later";
+			rowdata[5] = "0";
+			model.addRow(rowdata);
+		}
 	}
 }
