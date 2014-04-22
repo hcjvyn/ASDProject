@@ -134,12 +134,7 @@ public class CardFrm extends GUI
 		}
 	}
     
-    //When the Exit button is pressed this code gets executed
-    //this will exit from the system
-    void ExitButton_actionPerformed(java.awt.event.ActionEvent event)
-	{
-		System.exit(0);
-	}
+   
 
 	void AddAccountButton_actionPerformed(java.awt.event.ActionEvent event)
 	{

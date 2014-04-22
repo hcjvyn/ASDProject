@@ -1,5 +1,6 @@
 package banking.ui;
 
+import javax.swing.JDialog;
 import javax.swing.JOptionPane;
 import javax.swing.UIManager;
 
@@ -9,6 +10,7 @@ import framework.transaction.ITransaction;
 import framework.transaction.TransactionManager;
 import framework.ui.AddAccDialog;
 import framework.ui.GUI;
+import framework.ui.actions.SymWindow;
 
 /**
  * A basic JFC based application.
@@ -40,8 +42,7 @@ public class BankFrm extends GUI {
 		AddinterestButton.setText("Add interest");
 		JPanel1.add(AddinterestButton);
 
-		SymWindow aSymWindow = new SymWindow();
-		this.addWindowListener(aSymWindow);
+		addWindowListener(this);
 		SymAction lSymAction = new SymAction();
 		ExitButton.addActionListener(lSymAction);
 		AddAccountButton.addActionListener(lSymAction);
@@ -90,30 +91,7 @@ public class BankFrm extends GUI {
 		}
 	}
 
-	class SymWindow extends java.awt.event.WindowAdapter
-	{
-		public void windowClosing(java.awt.event.WindowEvent event)
-		{
-			Object object = event.getSource();
-			if (object == BankFrm.this)
-				BankFrm_windowClosing(event);
-		}
-	}
-
-	void BankFrm_windowClosing(java.awt.event.WindowEvent event)
-	{
-		// to do: code goes here.
-			 
-		BankFrm_windowClosing_Interaction1(event);
-	}
-
-	void BankFrm_windowClosing_Interaction1(java.awt.event.WindowEvent event) {
-		try {
-			this.exitApplication();
-		} catch (Exception e) {
-		}
-	}
-
+	
 	class SymAction implements java.awt.event.ActionListener
 	{
 		public void actionPerformed(java.awt.event.ActionEvent event)
@@ -122,9 +100,9 @@ public class BankFrm extends GUI {
 			if (object == ExitButton)
 				ExitButton_actionPerformed(event);
 			else if (object == AddAccountButton)
-				AddAccountButton_actionPerformed(event);
+				AddAccountButton_actionPerformed(event, new JDialog_AddPAcc());
 			else if (object == AddCompanyAccountButton)
-				AddCompanyAccountButton_actionPerformed(event);
+				AddAccountButton_actionPerformed(event, new JDialog_AddCompAcc());
 			else if (object == DepositButton)
 				DepositButton_actionPerformed(event);
 			else if (object == WithdrawButton)
@@ -135,56 +113,7 @@ public class BankFrm extends GUI {
 		}
 	}
     
-    //When the Exit button is pressed this code gets executed
-    //this will exit from the system
-    void ExitButton_actionPerformed(java.awt.event.ActionEvent event)
-	{
-		System.exit(0);
-	}
-
-	void AddAccountButton_actionPerformed(java.awt.event.ActionEvent event)
-	{
-		/*
-		 JDialog_AddPAcc type object is for adding personal information
-		 construct a JDialog_AddPAcc type object 
-		 set the boundaries and show it 
-		*/
-		
-		AddAccDialog pac = new JDialog_AddPAcc();
-		pac.setBounds(450, 20, 300, 330);
-		pac.show();
-		
-		ICustomer customer = pac.getCustomer();
-		
-		ITransaction transaction = new AddAccountTransaction(accountManager, customer);
-		TransactionManager transactionManager = new TransactionManager();
-		transactionManager.submit(transaction);
-		
-		refreshTable();
-    }
-
-	void AddCompanyAccountButton_actionPerformed(java.awt.event.ActionEvent event)
-	{
-		/*
-		 construct a JDialog_AddCompAcc type object 
-		 set the boundaries and 
-		 show it 
-		*/
-		
-		JDialog_AddCompAcc pac = new JDialog_AddCompAcc();
-		pac.setBounds(450, 20, 300, 330);
-		pac.show();
-		
-		ICustomer customer = pac.getCustomer();
-		
-		ITransaction transaction = new AddAccountTransaction(accountManager, customer);
-		TransactionManager transactionManager = new TransactionManager();
-		transactionManager.submit(transaction);
-
-		refreshTable();
-	}
-
-	void DepositButton_actionPerformed(java.awt.event.ActionEvent event)
+    void DepositButton_actionPerformed(java.awt.event.ActionEvent event)
 	{
 	    // get selected name
         int selection = JTable1.getSelectionModel().getMinSelectionIndex();
@@ -239,21 +168,5 @@ public class BankFrm extends GUI {
 	    
 	}
 	
-	void refreshTable()
-	{
-		for(int i=0 ; i < model.getRowCount() ; i++)
-			model.removeRow(i);
-		
-		for(int i=0 ; i < accountManager.getCustomerList().size() ; i++)
-		{
-			ICustomer customerTemp = accountManager.getCustomerList().get(i);
-			rowdata[0] = customerTemp.getAccount().getAccountNum();
-			rowdata[1] = customerTemp.getName();
-			rowdata[2] = customerTemp.getCity();
-			rowdata[3] = "Later";
-			rowdata[4] = "Later";
-			rowdata[5] = "0";
-			model.addRow(rowdata);
-		}
-	}
+	
 }

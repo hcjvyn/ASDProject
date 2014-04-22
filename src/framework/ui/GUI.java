@@ -5,8 +5,13 @@ import java.awt.*;
 import javax.swing.*;
 import javax.swing.table.*;
 
+import banking.ui.JDialog_AddPAcc;
 import framework.account.AccountManager;
+import framework.customer.ICustomer;
+import framework.transaction.AddAccountTransaction;
+import framework.transaction.ITransaction;
 import framework.transaction.TransactionManager;
+import framework.ui.actions.SymWindow;
 
 public class GUI extends JFrame {
 	protected TransactionManager transactionManager=new TransactionManager();
@@ -22,7 +27,7 @@ public class GUI extends JFrame {
 	protected DefaultTableModel model;
 	protected JTable JTable1;
 	protected JScrollPane JScrollPane1;
-	protected Object rowdata[];
+	protected String rowdata[];
 	
 	
 	public GUI()
@@ -43,7 +48,7 @@ public class GUI extends JFrame {
         JScrollPane1 = new JScrollPane();
         model = new DefaultTableModel();
         JTable1 = new JTable(model);
-        rowdata = new Object[8];
+        rowdata = new String[8];
         
         JPanel1.add(JScrollPane1);
         JScrollPane1.setBounds(12,92,444,160);
@@ -66,15 +71,92 @@ public class GUI extends JFrame {
 		ExitButton.setText("Exit");
 		ExitButton.setBounds(468,248,96,31);
 		JPanel1.add(ExitButton);
+		addWindowListener(this);
 		
-		String[] columnNames= { "AccountNr", "Name", "City", "P/C", "Ch/S", "Amount" };
-        setTableColumns(columnNames);
+		SymAction lSymAction = new SymAction();
+		ExitButton.addActionListener(lSymAction);
+		AddAccountButton.addActionListener(lSymAction);
+		DepositButton.addActionListener(lSymAction);
+		WithdrawButton.addActionListener(lSymAction);
 	}
 	
 	public void setTableColumns(String[] columnNames)
 	{
 		for(int i=0 ; i < columnNames.length ; i++)
 			model.addColumn(columnNames[i]);
-		rowdata = new Object[columnNames.length];
+		rowdata = new String[columnNames.length];
 	}
+	
+	public void addWindowListener(GUI frame){
+		SymWindow aSymWindow = new SymWindow(this);
+		frame.addWindowListener(aSymWindow);
+	}
+	
+	
+	class SymAction implements java.awt.event.ActionListener
+	{
+		public void actionPerformed(java.awt.event.ActionEvent event)
+		{
+			Object object = event.getSource();
+			if (object == ExitButton)
+				ExitButton_actionPerformed(event);
+			else if (object == AddAccountButton)
+				AddAccountButton_actionPerformed(event, new AddAccDialog());
+			/*else if (object == DepositButton)
+				DepositButton_actionPerformed(event);
+			else if (object == WithdrawButton)
+				WithdrawButton_actionPerformed(event);
+			else if (object == AddinterestButton)
+				AddinterestButton_actionPerformed(event);*/
+			
+		}
+	}
+	
+	protected void AddAccountButton_actionPerformed(java.awt.event.ActionEvent event, AddAccDialog pac)
+	{
+		/*
+		 JDialog_AddPAcc type object is for adding personal information
+		 construct a JDialog_AddPAcc type object 
+		 set the boundaries and show it 
+		*/
+		
+		//AddAccDialog pac = new JDialog_AddPAcc();
+		pac.setBounds(450, 20, 300, 330);
+		pac.show();
+		
+		ICustomer customer = pac.getCustomer();
+		
+		ITransaction transaction = new AddAccountTransaction(accountManager, customer);
+		TransactionManager transactionManager = new TransactionManager();
+		transactionManager.submit(transaction);
+		
+		refreshTable();
+    }
+	
+	void refreshTable()
+	{
+		for(int i=0 ; i < model.getRowCount() ; i++)
+			model.removeRow(i);
+		
+		for(int i=0 ; i < accountManager.getCustomerList().size() ; i++)
+		{
+			ICustomer customerTemp = accountManager.getCustomerList().get(i);
+			rowdata[0] = customerTemp.getAccount().getAccountNum();
+			rowdata[1] = customerTemp.getName();
+			rowdata[2] = customerTemp.getCity();
+			rowdata[3] = "Later";
+			rowdata[4] = "Later";
+			rowdata[5] = "0";
+			model.addRow(rowdata);
+		}
+	}
+	
+	//When the Exit button is pressed this code gets executed
+    //this will exit from the system
+    protected void ExitButton_actionPerformed(java.awt.event.ActionEvent event)
+	{
+		System.exit(0);
+	}
+	
+	
 }
