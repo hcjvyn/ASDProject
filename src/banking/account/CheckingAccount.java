@@ -10,6 +10,7 @@ public class CheckingAccount extends Account {
 	public CheckingAccount(ICustomer customer, String accountNum) {
 		super(customer, accountNum);
 		this.interestRate = INTEREST_RATE;
+		this.accountType = "C";
 	}
 
 }

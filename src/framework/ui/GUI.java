@@ -187,7 +187,7 @@ public class GUI extends JFrame {
 		rowdata2[0] = customerTemp.getAccount().getAccountNum();
 		rowdata2[1] = customerTemp.getName();
 		rowdata2[2] = customerTemp.getCity();
-		rowdata2[3] = customerTemp.getAccount().getAccountType();
+		rowdata2[3] = customerTemp.getCustomerType();
 		rowdata2[4] = customerTemp.getAccount().getAccountType();
 		rowdata2[5] = Double.toString(customerTemp.getAccount().getBalance());
 		return rowdata2;
