@@ -10,5 +10,5 @@ public abstract class ATransaction implements ITransaction{
 		this.accountManager = acctMgr;
 	}
 	
-	public abstract void execute(IAccount acct);
+	public abstract void execute();
 }

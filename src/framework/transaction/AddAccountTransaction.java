@@ -17,7 +17,7 @@ public class AddAccountTransaction extends ATransaction {
 	}
 
 	@Override
-	public void execute(IAccount acct) {
+	public void execute() {
 		accountManager.addCustomer(customer);
 	}
 

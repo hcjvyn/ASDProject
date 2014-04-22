@@ -8,22 +8,24 @@ public class ComputeTransaction extends ATransaction {
 	
 	private IOperation iOperation;
 	private double amountToBeComputed;
+	private IAccount account;
 	
 	/**
 	 * Initialize all variables.
 	 * @param acctMgr
 	 */
-	public ComputeTransaction(AccountManager acctMgr, IOperation iOperation, double amountToBeComputed) {
+	public ComputeTransaction(AccountManager acctMgr, IOperation iOperation, double amountToBeComputed, IAccount acct) {
 		super(acctMgr);
 		this.iOperation = iOperation;
 		this.amountToBeComputed = amountToBeComputed;
+		this.account = acct;
 	}
 
 	
 	
 	@Override
-	public void execute(IAccount acct) {
-		this.iOperation.compute(acct);
+	public void execute() {
+		this.iOperation.compute(account);
 	}
 
 }
