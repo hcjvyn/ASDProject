@@ -8,14 +8,13 @@ import framework.customer.ICustomer;
 import framework.transaction.AddAccountTransaction;
 import framework.transaction.ITransaction;
 import framework.transaction.TransactionManager;
-import framework.ui.AddAccDialog;
+import framework.ui.AAddAccDialog;
 import framework.ui.GUI;
 
 /**
  * A basic JFC based application.
  */
-public class CardFrm extends GUI
-{
+public class CardFrm extends GUI {
     /****
      * init variables in the object
      ****/
@@ -144,7 +143,7 @@ public class CardFrm extends GUI
 		 set the boundaries and show it 
 		*/
 		
-		AddAccDialog ccac = new JDialog_AddCCAccount(thisframe);
+		AAddAccDialog ccac = new JDialog_AddCCAccount();
 		ccac.setBounds(450, 20, 300, 380);
 		ccac.show();
 
