@@ -34,7 +34,7 @@ public class CardFrm extends GUI {
         newaccount=false;
         		
 		AddAccountButton.setText("Add Credit-card account");
-		
+        
 		GenerateMonthlyBillsButton.setText("Generate Monthly bills");
 		GenerateMonthlyBillsButton.setActionCommand("jbutton");
 		JPanel1.add(GenerateMonthlyBillsButton);

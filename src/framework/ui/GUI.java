@@ -156,7 +156,6 @@ public class GUI extends JFrame {
    
 		    
 		    ICustomer iCustomerTemp=accountManager.findCustomerByAccountNumber(dep.getAccountNumber());
-		    System.out.println(iCustomerTemp);
 		    
 		    IOperation addOperation=null;
 		    if (event.getSource() == DepositButton)
@@ -172,7 +171,7 @@ public class GUI extends JFrame {
 	
 	void refreshTable()
 	{
-		for(int i=0 ; i < model.getRowCount() ; i++)
+		for(int i=model.getRowCount() - 1 ; i >= 0  ; i--)
 			model.removeRow(i);
 		
 		for(int i=0 ; i < accountManager.getCustomerList().size() ; i++)
