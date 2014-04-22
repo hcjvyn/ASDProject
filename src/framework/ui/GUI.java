@@ -1,20 +1,17 @@
 package framework.ui;
 
 import java.awt.*;
-import java.util.ArrayList;
 
 import javax.swing.*;
 import javax.swing.table.*;
 
 import framework.account.AccountManager;
-import framework.account.factory.IAccountFactory;
 import framework.transaction.TransactionManager;
 
 public class GUI extends JFrame {
-	private TransactionManager transactionManager;
+	protected TransactionManager transactionManager;
 	private DialogBox dialogManager;
-	private AccountManager accountManager;
-	private ArrayList<IAccountFactory> iAccountFactoryList;
+	protected AccountManager accountManager;
 	
 	protected JPanel JPanel1 = new JPanel();
 	protected JButton AddAccountButton = new JButton();

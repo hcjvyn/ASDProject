@@ -1,10 +1,13 @@
 package banking.ui;
 
+import java.util.Vector;
+
 import javax.swing.*;
 
 import framework.account.*;
 import framework.account.factory.*;
 import framework.customer.*;
+import framework.transaction.*;
 import framework.ui.GUI;
 
 /**
@@ -166,7 +169,11 @@ public class BankFrm extends GUI
 		IAccountFactory iAccountFactory = new DefaultAccountFactory();
 		IAccount iAccount = iAccountFactory.createAccount(iCustomer, accountnr);
 		iCustomer.addAccount(iAccount);
+		ITransaction iTransaction = new AddAccountTransaction(accountManager, iCustomer);
+		TransactionManager transactionManager = new TransactionManager();
+		transactionManager.submit(iTransaction);
 		
+		/*
 		if (newaccount){
             // add row to table
             rowdata[0] = accountnr;
@@ -179,7 +186,9 @@ public class BankFrm extends GUI
             JTable1.getSelectionModel().setAnchorSelectionIndex(-1);
             newaccount=false;
         }
-
+		*/
+		refreshTable();
+		
        
         
     }
@@ -264,5 +273,14 @@ public class BankFrm extends GUI
 	{
 		  JOptionPane.showMessageDialog(AddinterestButton, "Add interest to all accounts","Add interest to all accounts",JOptionPane.WARNING_MESSAGE);
 	    
+	}
+	
+	void refreshTable()
+	{
+		for(int i=0 ; i < model.getRowCount() ; i++)
+			model.removeRow(i);
+		
+		for(int i=0 ; i < accountManager.getCustomerList().size() ; i++)
+			model.addRow((Vector) accountManager.getCustomerList().get(i));
 	}
 }
