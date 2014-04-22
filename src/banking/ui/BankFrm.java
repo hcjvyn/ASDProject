@@ -109,29 +109,6 @@ public class BankFrm extends GUI {
 			
 		}
 	}
-    
-    void DepositButton_actionPerformed(java.awt.event.ActionEvent event)
-	{
-	    // get selected name
-        int selection = JTable1.getSelectionModel().getMinSelectionIndex();
-        if (selection >=0){
-            String accnr = (String)model.getValueAt(selection, 0);
-    	    
-		    //Show the dialog for adding deposit amount for the current mane
-		    JDialog_Deposit dep = new JDialog_Deposit(accnr);
-		    dep.setBounds(430, 15, 275, 140);
-		    dep.show();
-    		
-		    // compute new amount
-            long deposit = Long.parseLong(dep.getAmount());
-            String samount = (String)model.getValueAt(selection, 5);
-            long currentamount = Long.parseLong(samount);
-		    long newamount=currentamount+deposit;
-		    model.setValueAt(String.valueOf(newamount),selection, 5);
-		}
-		
-		
-	}
 
 	void WithdrawButton_actionPerformed(java.awt.event.ActionEvent event)
 	{

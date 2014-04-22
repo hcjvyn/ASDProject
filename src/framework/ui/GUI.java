@@ -139,7 +139,7 @@ public class GUI extends JFrame {
 		refreshTable();
     }
 	
-	void DepositButton_actionPerformed(java.awt.event.ActionEvent event)
+	protected void DepositButton_actionPerformed(java.awt.event.ActionEvent event)
 	{
 	    // get selected name
         int selection = JTable1.getSelectionModel().getMinSelectionIndex();

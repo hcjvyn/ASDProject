@@ -164,7 +164,7 @@ public class CardFrm extends GUI {
 	    
 	}
 
-	void DepositButton_actionPerformed(java.awt.event.ActionEvent event)
+	/*void DepositButton_actionPerformed(java.awt.event.ActionEvent event)
 	{
 	    // get selected name
         int selection = JTable1.getSelectionModel().getMinSelectionIndex();
@@ -185,7 +185,7 @@ public class CardFrm extends GUI {
 		}
 		
 		
-	}
+	}*/
 
 	void WithdrawButton_actionPerformed(java.awt.event.ActionEvent event)
 	{
