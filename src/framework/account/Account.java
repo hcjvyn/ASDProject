@@ -60,7 +60,7 @@ public class Account implements IAccount {
 	@Override
 	public ArrayList<IEntry> getEntryList() {
 		// TODO Auto-generated method stub
-		return this.getEntryList();
+		return this.entryList;
 	}
 
 	@Override
