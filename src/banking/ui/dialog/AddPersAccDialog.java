@@ -6,9 +6,9 @@ import java.util.Date;
 
 import banking.account.factory.CheckingAccountFactory;
 import banking.account.factory.SavingAccountFactory;
-import banking.customer.Person;
 import framework.account.factory.IAccountFactory;
 import framework.customer.ICustomer;
+import framework.customer.Person;
 import framework.ui.dialog.AAddAccDialog;
 
 /*

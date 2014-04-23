@@ -2,8 +2,8 @@ package banking.ui.dialog;
 
 import banking.account.factory.CheckingAccountFactory;
 import banking.account.factory.SavingAccountFactory;
-import banking.customer.Organization;
 import framework.account.factory.IAccountFactory;
+import framework.customer.Company;
 import framework.customer.ICustomer;
 import framework.ui.dialog.AAddAccDialog;
 
@@ -125,7 +125,7 @@ public class AddCompAccDialog extends AAddAccDialog {
 		String zip = JTextField_ZIP.getText();
 		String state = JTextField_ST.getText();
 		
-		return new Organization(
+		return new Company(
 				clientName,
 				street,
 				city,
