@@ -4,5 +4,5 @@ import framework.account.IAccount;
 import framework.customer.ICustomer;
 
 public interface IAccountFactory {
-	public IAccount createAccount(ICustomer iCustomer, String accountNumber);
+	IAccount createAccount(ICustomer iCustomer, String accountNumber, String accountType);
 }

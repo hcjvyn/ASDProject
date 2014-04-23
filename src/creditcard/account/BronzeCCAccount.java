@@ -4,8 +4,9 @@ import framework.customer.ICustomer;
 
 public class BronzeCCAccount extends ACCAccount {
 
+	public static final String ACCT_TYPE = "B";
+	
 	private static final double INTEREST_RATE = 0.06;
-	private static final String ACCT_TYPE = "S";
 	private static final double MINIMUM_PAYMENT_RATE = 0.14;
 	
 	public BronzeCCAccount(ICustomer customer, String accountNum) {

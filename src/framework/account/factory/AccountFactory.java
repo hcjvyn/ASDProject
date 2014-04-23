@@ -8,7 +8,7 @@ import framework.customer.ICustomer;
 public class AccountFactory implements IAccountFactory {
 
 	@Override
-	public IAccount createAccount(ICustomer iCustomer, String accountNumber) {
+	public IAccount createAccount(ICustomer iCustomer, String accountNumber, String accountType) {
 		return new Account(iCustomer, accountNumber);
 	}
 

@@ -4,8 +4,9 @@ import framework.customer.ICustomer;
 
 public class SilverCCAccount extends ACCAccount {
 
+	public static final String ACCT_TYPE = "S";
+	
 	private static final double INTEREST_RATE = 0.1;
-	private static final String ACCT_TYPE = "S";
 	private static final double MINIMUM_PAYMENT_RATE = 0.12;
 	
 	public SilverCCAccount(ICustomer customer, String accountNum) {
