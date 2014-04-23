@@ -1,4 +1,4 @@
-package framework.ui;
+package framework.ui.dialog;
 
 import framework.account.factory.AccountFactory;
 import framework.account.factory.IAccountFactory;

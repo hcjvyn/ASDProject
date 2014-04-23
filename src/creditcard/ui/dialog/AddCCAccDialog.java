@@ -1,4 +1,4 @@
-package creditcard.ui;
+package creditcard.ui.dialog;
 
 /*
 		A basic implementation of the JDialog class.
@@ -9,16 +9,16 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import creditcard.account.factory.GoldCCAccountFactory;
-import creditcard.account.factory.PlatinumCCAccountFactory;
+import creditcard.account.factory.BronzeCCAccountFactory;
 import creditcard.account.factory.SilverCCAccountFactory;
 import framework.account.factory.IAccountFactory;
 import framework.customer.Customer;
 import framework.customer.ICustomer;
-import framework.ui.AAddAccDialog;
+import framework.ui.dialog.AAddAccDialog;
 
-public class JDialog_AddCCAccount extends AAddAccDialog {
+public class AddCCAccDialog extends AAddAccDialog {
    
-	public JDialog_AddCCAccount()
+	public AddCCAccDialog()
 	{
 		super();
 		
@@ -207,6 +207,6 @@ public class JDialog_AddCCAccount extends AAddAccDialog {
 		else if (JRadioButton_Silver.isSelected())
 			return new SilverCCAccountFactory();
 		else
-			return new PlatinumCCAccountFactory();
+			return new BronzeCCAccountFactory();
 	}
 }

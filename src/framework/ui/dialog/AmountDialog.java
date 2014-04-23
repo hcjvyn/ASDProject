@@ -1,4 +1,4 @@
-package framework.ui;
+package framework.ui.dialog;
 
 
 public class AmountDialog extends javax.swing.JDialog {

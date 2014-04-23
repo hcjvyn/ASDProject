@@ -1,4 +1,4 @@
-package framework.ui;
+package framework.ui.dialog;
 
 import javax.swing.JDialog;
 

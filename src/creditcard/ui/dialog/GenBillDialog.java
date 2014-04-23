@@ -1,4 +1,4 @@
-package creditcard.ui;
+package creditcard.ui.dialog;
 
 /*
 		A basic implementation of the JDialog class.
@@ -15,12 +15,12 @@ import framework.account.IAccount;
 import framework.account.entry.IEntry;
 import framework.customer.ICustomer;
 
-public class JDialogGenBill extends javax.swing.JDialog
+public class GenBillDialog extends javax.swing.JDialog
 {
     String billstring;
     AccountManager accountManager;
     
-	public JDialogGenBill(AccountManager accountManager)
+	public GenBillDialog(AccountManager accountManager)
 	{
 		//super(parent);
 		
