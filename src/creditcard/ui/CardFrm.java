@@ -41,8 +41,8 @@ public class CardFrm extends GUI {
 		SymAction lSymAction = new SymAction();
 		ExitButton.addActionListener(lSymAction);
 		GenerateMonthlyBillsButton.addActionListener(lSymAction);
-		DepositButton.addActionListener(lSymAction);
-		WithdrawButton.addActionListener(lSymAction);
+//		DepositButton.addActionListener(lSymAction);
+//		WithdrawButton.addActionListener(lSymAction);
 		
 	}
 

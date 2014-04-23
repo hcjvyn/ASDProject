@@ -189,6 +189,7 @@ public class GUI extends JFrame {
 			ICustomer customerTemp = accountManager.getCustomerList().get(i);
 			model.addRow(fillRowData(customerTemp));
 		}
+		JTable1.setRowSelectionInterval(0, 0);
 	}
 	
 	protected String[] fillRowData(ICustomer customerTemp)

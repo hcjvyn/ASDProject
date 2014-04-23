@@ -49,8 +49,8 @@ public class BankFrm extends GUI {
 		SymAction lSymAction = new SymAction();
 		ExitButton.addActionListener(lSymAction);
 		AddCompanyAccountButton.addActionListener(lSymAction);
-		DepositButton.addActionListener(lSymAction);
-		WithdrawButton.addActionListener(lSymAction);
+//		DepositButton.addActionListener(lSymAction);
+//		WithdrawButton.addActionListener(lSymAction);
 		AddinterestButton.addActionListener(lSymAction);
 		
 	}
