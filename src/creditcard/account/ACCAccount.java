@@ -1,4 +1,4 @@
-package creditcard.account.factory;
+package creditcard.account;
 
 import java.util.Date;
 

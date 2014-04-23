@@ -1,6 +1,5 @@
 package creditcard.account;
 
-import creditcard.account.factory.ACCAccount;
 import framework.customer.ICustomer;
 
 public class GoldCCAccount extends ACCAccount {
