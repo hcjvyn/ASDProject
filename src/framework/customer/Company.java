@@ -1,14 +1,12 @@
-package banking.customer;
+package framework.customer;
 
 import java.util.ArrayList;
 
-import framework.customer.Customer;
-
-public class Organization extends Customer implements IOrganization {
+public class Company extends Customer implements ICompany {
 
 	private ArrayList<IPerson> personList = new ArrayList<IPerson>();
 
-	public Organization(String name, String street, String city, String state,
+	public Company(String name, String street, String city, String state,
 			String zip) {
 		super(name, street, city, state, zip, "C");
 	}
