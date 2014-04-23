@@ -20,7 +20,7 @@ public class JDialogGenBill extends javax.swing.JDialog
     String billstring;
     AccountManager accountManager;
     
-	public JDialogGenBill(Frame parent, AccountManager accountManager)
+	public JDialogGenBill(AccountManager accountManager)
 	{
 		//super(parent);
 		
@@ -96,11 +96,6 @@ public class JDialogGenBill extends javax.swing.JDialog
 		SymAction lSymAction = new SymAction();
 		JButton_OK.addActionListener(lSymAction);
 		//}}
-	}
-
-	public JDialogGenBill()
-	{
-		this((Frame)null, null);
 	}
 
 	//{{DECLARE_CONTROLS
