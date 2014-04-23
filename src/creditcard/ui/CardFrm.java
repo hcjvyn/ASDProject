@@ -1,14 +1,9 @@
 package creditcard.ui;
 
 import javax.swing.JButton;
-import javax.swing.JOptionPane;
 import javax.swing.UIManager;
 
-import banking.ui.JDialog_AddPAcc;
 import framework.customer.ICustomer;
-import framework.transaction.AddAccountTransaction;
-import framework.transaction.ITransaction;
-import framework.transaction.TransactionManager;
 import framework.ui.AAddAccDialog;
 import framework.ui.GUI;
 
@@ -40,8 +35,9 @@ public class CardFrm extends GUI {
 		JPanel1.add(GenerateMonthlyBillsButton);
 		GenerateMonthlyBillsButton.setBounds(240,20,192,33);
 		
-		SymWindow aSymWindow = new SymWindow();
-		this.addWindowListener(aSymWindow);
+		this.addWindowListener(this);
+//		SymWindow aSymWindow = new SymWindow();
+//		this.addWindowListener(aSymWindow);
 		SymAction lSymAction = new SymAction();
 		ExitButton.addActionListener(lSymAction);
 		GenerateMonthlyBillsButton.addActionListener(lSymAction);
@@ -88,7 +84,7 @@ public class CardFrm extends GUI {
 		}
 	}
 
-	class SymWindow extends java.awt.event.WindowAdapter
+	/*class SymWindow extends java.awt.event.WindowAdapter
 	{
 		public void windowClosing(java.awt.event.WindowEvent event)
 		{
@@ -110,7 +106,7 @@ public class CardFrm extends GUI {
 			this.exitApplication();
 		} catch (Exception e) {
 		}
-	}
+	}*/
 
 	class SymAction implements java.awt.event.ActionListener
 	{

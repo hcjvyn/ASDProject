@@ -1,20 +1,8 @@
 package framework.ui;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-
-import javax.swing.JFrame;
-
-import framework.account.IAccount;
-import framework.account.factory.IAccountFactory;
-import banking.account.factory.CheckingAccountFactory;
-import banking.account.factory.SavingAccountFactory;
-import banking.customer.Person;
 
 public class AmountDialog extends javax.swing.JDialog {
 
-	protected String accnr;
 	protected String amount;
 
 	javax.swing.JLabel JLabel1 = new javax.swing.JLabel();
@@ -25,8 +13,6 @@ public class AmountDialog extends javax.swing.JDialog {
 	javax.swing.JTextField JTextField_Deposit = new javax.swing.JTextField();
 	
 	public AmountDialog(String accnr, String title) {
-		this.accnr = accnr;
-		
 		setTitle(title);
 		setModal(true);
 		getContentPane().setLayout(null);
@@ -83,7 +69,7 @@ public class AmountDialog extends javax.swing.JDialog {
 	void JButtonOK_actionPerformed(java.awt.event.ActionEvent event)
 	{
 		try {
-			accnr=JTextField_NAME.getText();
+//			accnr=JTextField_NAME.getText();
 			amount=JTextField_Deposit.getText();
 			dispose();
 		} catch (Exception e) {
@@ -98,10 +84,6 @@ public class AmountDialog extends javax.swing.JDialog {
         dispose();
 	}
 	
-	public String getAccountNumber()
-	{
-		return this.accnr;
-	}
 	public String getAmount()
 	{
 		return this.amount;

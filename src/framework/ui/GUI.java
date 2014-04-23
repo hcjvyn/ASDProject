@@ -11,16 +11,17 @@ import javax.swing.table.DefaultTableModel;
 
 import framework.account.AccountManager;
 import framework.customer.ICustomer;
+import framework.operation.AddOperation;
+import framework.operation.IOperation;
+import framework.operation.SubtractOperation;
 import framework.transaction.AddAccountTransaction;
 import framework.transaction.ComputeTransaction;
 import framework.transaction.ITransaction;
 import framework.transaction.TransactionManager;
 import framework.ui.actions.SymWindow;
-import framework.operation.*;
 
 public class GUI extends JFrame {
 	protected TransactionManager transactionManager=new TransactionManager();
-	private DialogBox dialogManager;
 	protected AccountManager accountManager=new AccountManager();
 	
 	protected JPanel JPanel1 = new JPanel();
@@ -36,7 +37,7 @@ public class GUI extends JFrame {
 	
 	protected void setTable()
 	{
-		String[] columnNames= { "AccountNr", "Name", "City", "P/C", "Ch/S", "Amount" };
+		String[] columnNames= { "AccountNr", "Name", "City", "Amount" };
         setTableColumns(columnNames);
 	}
 	
@@ -141,10 +142,12 @@ public class GUI extends JFrame {
 		
 		ICustomer customer = pac.getCustomer();
 		
-		ITransaction transaction = new AddAccountTransaction(accountManager, customer);
-		TransactionManager transactionManager = new TransactionManager();
-		transactionManager.submit(transaction);
-		refreshTable();
+		if (customer!=null) {
+			ITransaction transaction = new AddAccountTransaction(accountManager, customer);
+			TransactionManager transactionManager = new TransactionManager();
+			transactionManager.submit(transaction);
+			refreshTable();
+		}
     }
 	
 	protected void computeActionPerformed(java.awt.event.ActionEvent event)
@@ -159,17 +162,20 @@ public class GUI extends JFrame {
 		    dep.show();
    
 		    
-		    ICustomer iCustomerTemp=accountManager.findCustomerByAccountNumber(dep.getAccountNumber());
+		    ICustomer iCustomerTemp=accountManager.findCustomerByAccountNumber(accnr);
 		    
-		    IOperation addOperation=null;
-		    if (event.getSource() == DepositButton)
-		    	addOperation = new AddOperation(Double.parseDouble(dep.getAmount()));
-			else if (event.getSource() == WithdrawButton)
-				addOperation = new SubtractOperation(Double.parseDouble(dep.getAmount()));
-		    ITransaction transaction = new ComputeTransaction(accountManager, addOperation, iCustomerTemp.getAccount());
-			TransactionManager transactionManager = new TransactionManager();
-			transactionManager.submit(transaction);
-		    refreshTable();
+		    String amt = dep.getAmount();
+		    if (amt!=null) {
+		    	IOperation addOperation=null;
+		    	if (event.getSource() == DepositButton)
+		    		addOperation = new AddOperation(Double.parseDouble(amt));
+		    	else if (event.getSource() == WithdrawButton)
+		    		addOperation = new SubtractOperation(Double.parseDouble(amt));
+		    	ITransaction transaction = new ComputeTransaction(accountManager, addOperation, iCustomerTemp.getAccount());
+		    	TransactionManager transactionManager = new TransactionManager();
+		    	transactionManager.submit(transaction);
+		    	refreshTable();
+		    }
 		}
 	}
 	
@@ -187,13 +193,13 @@ public class GUI extends JFrame {
 	
 	protected String[] fillRowData(ICustomer customerTemp)
 	{
-		String[] rowdata2=new String[6];
+		String[] rowdata2=new String[4];
 		rowdata2[0] = customerTemp.getAccount().getAccountNum();
 		rowdata2[1] = customerTemp.getName();
 		rowdata2[2] = customerTemp.getCity();
-		rowdata2[3] = customerTemp.getCustomerType();
-		rowdata2[4] = customerTemp.getAccount().getAccountType();
-		rowdata2[5] = Double.toString(customerTemp.getAccount().getBalance());
+//		rowdata2[3] = customerTemp.getCustomerType();
+//		rowdata2[4] = customerTemp.getAccount().getAccountType();
+		rowdata2[3] = Double.toString(customerTemp.getAccount().getBalance());
 		return rowdata2;
 	}
 	

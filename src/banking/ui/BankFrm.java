@@ -1,21 +1,16 @@
 package banking.ui;
 
-import javax.swing.JDialog;
 import javax.swing.JOptionPane;
 import javax.swing.UIManager;
 
 import banking.operation.AddInterestOperation;
 import framework.customer.ICustomer;
-import framework.operation.AddOperation;
 import framework.operation.IOperation;
-import framework.transaction.AddAccountTransaction;
 import framework.transaction.ComputeTransaction;
 import framework.transaction.ITransaction;
 import framework.transaction.TransactionManager;
 import framework.ui.AAddAccDialog;
-import framework.ui.AddAccDialog;
 import framework.ui.GUI;
-import framework.ui.actions.SymWindow;
 
 /**
  * A basic JFC based application.
@@ -25,6 +20,12 @@ public class BankFrm extends GUI {
 	javax.swing.JButton AddCompanyAccountButton = new javax.swing.JButton();
 	javax.swing.JButton AddinterestButton = new javax.swing.JButton();
     
+	protected void setTable()
+	{
+		String[] columnNames= { "AccountNr", "Name", "City", "P/C", "Ch/S", "Amount" };
+        setTableColumns(columnNames);
+	}
+	
 	public BankFrm()
 	{
 		setTitle("Bank Application.");
@@ -122,6 +123,18 @@ public class BankFrm extends GUI {
 		transactionManager.submit(transaction);
 		JOptionPane.showMessageDialog(AddinterestButton, "Add interest to all accounts","Add interest to all accounts",JOptionPane.WARNING_MESSAGE);
 		refreshTable();
+	}
+	
+	protected String[] fillRowData(ICustomer customerTemp)
+	{
+		String[] rowdata2=new String[6];
+		rowdata2[0] = customerTemp.getAccount().getAccountNum();
+		rowdata2[1] = customerTemp.getName();
+		rowdata2[2] = customerTemp.getCity();
+		rowdata2[3] = customerTemp.getCustomerType();
+		rowdata2[4] = customerTemp.getAccount().getAccountType();
+		rowdata2[5] = Double.toString(customerTemp.getAccount().getBalance());
+		return rowdata2;
 	}
 	
 	
