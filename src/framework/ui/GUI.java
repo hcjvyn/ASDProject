@@ -132,7 +132,7 @@ public class GUI extends JFrame {
 		*/
 		
 		//AddAccDialog pac = new JDialog_AddPAcc();
-		pac.setBounds(450, 20, 300, 330);
+		pac.setBounds(450, 20, 300, 400);
 		pac.show();
 		
 		ICustomer customer = pac.getCustomer();
