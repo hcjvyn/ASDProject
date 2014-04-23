@@ -34,6 +34,11 @@ public class GUI extends JFrame {
 	protected JScrollPane JScrollPane1;
 	protected String rowdata[];
 	
+	protected void setTable()
+	{
+		String[] columnNames= { "AccountNr", "Name", "City", "P/C", "Ch/S", "Amount" };
+        setTableColumns(columnNames);
+	}
 	
 	public GUI()
 	{
@@ -54,8 +59,7 @@ public class GUI extends JFrame {
         model = new DefaultTableModel();
         JTable1 = new JTable(model);
         rowdata = new String[8];
-        String[] columnNames= { "AccountNr", "Name", "City", "P/C", "Ch/S", "Amount" };
-        setTableColumns(columnNames);
+        setTable();
         
         JPanel1.add(JScrollPane1);
         JScrollPane1.setBounds(12,92,444,160);

@@ -136,14 +136,19 @@ public class CardFrm extends GUI {
 		JDialogGenBill billFrm = new JDialogGenBill(this);
 		billFrm.setBounds(450, 20, 400, 350);
 		billFrm.show();
-	    
+	}
+	
+	protected void setTable()
+	{
+		String[] columnNames= { "CC Number", "Name", "Exp Date", "Type", "Balance" };
+        setTableColumns(columnNames);
 	}
 	 
 	public String[] fillRowData(ICustomer customerTemp)
 	{
 		String[] rowdata2=new String[5];
-		rowdata2[0] = customerTemp.getName();
-		rowdata2[1] = customerTemp.getAccount().getAccountNum();
+		rowdata2[0] = customerTemp.getAccount().getAccountNum();
+		rowdata2[1] = customerTemp.getName();
 		if(customerTemp.getAccount().getExpDate() != null)
 			rowdata2[2] = customerTemp.getAccount().getExpDate().toString();
 		else
