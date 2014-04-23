@@ -17,7 +17,7 @@ public class AddInterestOperation extends AOperation {
 	 */
 	@Override
 	public void compute(IAccount acct) {
-		double newBal = acct.getBalance()*acct.getInterestRate();
+		double newBal = acct.getBalance()*(1+acct.getInterestRate());
 		acct.setBalance(newBal);
 	}
 

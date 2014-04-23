@@ -4,8 +4,12 @@ import javax.swing.JDialog;
 import javax.swing.JOptionPane;
 import javax.swing.UIManager;
 
+import banking.operation.AddInterestOperation;
 import framework.customer.ICustomer;
+import framework.operation.AddOperation;
+import framework.operation.IOperation;
 import framework.transaction.AddAccountTransaction;
+import framework.transaction.ComputeTransaction;
 import framework.transaction.ITransaction;
 import framework.transaction.TransactionManager;
 import framework.ui.AAddAccDialog;
@@ -110,36 +114,14 @@ public class BankFrm extends GUI {
 		  return new JDialog_AddPAcc();
 	 }
 	 
-	void WithdrawButton_actionPerformed(java.awt.event.ActionEvent event)
-	{
-	    // get selected name
-        int selection = JTable1.getSelectionModel().getMinSelectionIndex();
-        if (selection >=0){
-            String accnr = (String)model.getValueAt(selection, 0);
-
-		    //Show the dialog for adding withdraw amount for the current mane
-		    JDialog_Withdraw wd = new JDialog_Withdraw(accnr);
-		    wd.setBounds(430, 15, 275, 140);
-		    wd.show();
-    		
-		    // compute new amount
-            long deposit = Long.parseLong(wd.getAmount());
-            String samount = (String)model.getValueAt(selection, 5);
-            long currentamount = Long.parseLong(samount);
-		    long newamount=currentamount-deposit;
-		    model.setValueAt(String.valueOf(newamount),selection, 5);
-		    if (newamount <0){
-		       JOptionPane.showMessageDialog(WithdrawButton, " Account "+accnr+" : balance is negative: $"+String.valueOf(newamount)+" !","Warning: negative balance",JOptionPane.WARNING_MESSAGE);
-		    }
-		}
-		
-		
-	}
-	
 	void AddinterestButton_actionPerformed(java.awt.event.ActionEvent event)
 	{
-		  JOptionPane.showMessageDialog(AddinterestButton, "Add interest to all accounts","Add interest to all accounts",JOptionPane.WARNING_MESSAGE);
-	    
+		IOperation addOperation = new AddInterestOperation();
+		ITransaction transaction = new ComputeTransaction(accountManager, addOperation);
+		TransactionManager transactionManager = new TransactionManager();
+		transactionManager.submit(transaction);
+		JOptionPane.showMessageDialog(AddinterestButton, "Add interest to all accounts","Add interest to all accounts",JOptionPane.WARNING_MESSAGE);
+		refreshTable();
 	}
 	
 	

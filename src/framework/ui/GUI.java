@@ -169,7 +169,7 @@ public class GUI extends JFrame {
 		}
 	}
 	
-	void refreshTable()
+	protected void refreshTable()
 	{
 		for(int i=model.getRowCount() - 1 ; i >= 0  ; i--)
 			model.removeRow(i);
