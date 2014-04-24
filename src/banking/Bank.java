@@ -3,10 +3,17 @@ package banking;
 import javax.swing.UIManager;
 
 import banking.account.factory.BankAccountFactory;
+import banking.operation.AddInterestOperation;
 import banking.ui.BankView;
 import framework.FinCo;
 import framework.FinancialApp;
 import framework.account.factory.IAccountFactory;
+import framework.operation.AddOperation;
+import framework.operation.IOperation;
+import framework.operation.SubtractOperation;
+import framework.transaction.ComputeTransaction;
+import framework.transaction.ITransaction;
+import framework.transaction.TransactionManager;
 import framework.ui.AFincoView;
 import framework.ui.FincoView;
 
@@ -47,7 +54,12 @@ public class Bank extends FinancialApp {
 			System.exit(1);
 		}
 	}
-
 	
-
+	public IOperation getOperation(String amt, String entryType)
+	{
+		IOperation operation= super.getOperation(amt, entryType);
+		if(operation!=null)
+			return operation;
+		return new AddInterestOperation();
+	}
 }

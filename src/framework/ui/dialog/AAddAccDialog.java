@@ -5,12 +5,14 @@ import javax.swing.JDialog;
 import framework.account.IAccount;
 import framework.account.factory.IAccountFactory;
 import framework.customer.ICustomer;
+import framework.ui.AFincoView;
 
 public abstract class AAddAccDialog extends JDialog {
 
 	protected ICustomer customer;
 	protected String acctNumber;
 	protected String acctType;
+	protected AFincoView parent; 
 	
 	public AAddAccDialog() {
 		//{{REGISTER_LISTENERS

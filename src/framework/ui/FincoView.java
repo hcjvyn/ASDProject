@@ -13,9 +13,12 @@ import javax.swing.table.DefaultTableModel;
 import framework.FinCo;
 import framework.FinancialApp;
 import framework.customer.ICustomer;
+import framework.operation.AddOperation;
+import framework.operation.SubtractOperation;
 import framework.ui.actions.SymWindow;
 import framework.ui.dialog.AAddAccDialog;
 import framework.ui.dialog.AddAccDialog;
+import framework.ui.dialog.AmountDialog;
 
 public class FincoView extends AFincoView {
 	
@@ -112,8 +115,8 @@ public class FincoView extends AFincoView {
 				ExitButton_actionPerformed(event);
 			else if (object == AddAccountButton)
 				AddAccountButton_actionPerformed(getAccountDialog());
-			/*else if (object == DepositButton || object == WithdrawButton)
-				computeActionPerformed(event);*/
+			else if (object == DepositButton || object == WithdrawButton)
+				computeActionPerformed(event);
 			/*else if (object == AddinterestButton)
 				AddinterestButton_actionPerformed(event);*/
 
@@ -146,9 +149,8 @@ public class FincoView extends AFincoView {
 		}
 
 	}
-
 	
-	/*protected void computeActionPerformed(java.awt.event.ActionEvent event)
+	protected void computeActionPerformed(java.awt.event.ActionEvent event)
 	{
 		int selection = JTable1.getSelectionModel().getMinSelectionIndex();
 		if (selection >=0){
@@ -159,23 +161,22 @@ public class FincoView extends AFincoView {
 			dep.setBounds(430, 15, 275, 140);
 			dep.show();
 
-
-			ICustomer iCustomerTemp=accountManager.findCustomerByAccountNumber(accnr);
-
 			String amt = dep.getAmount();
 			if (amt!=null) {
-				IOperation addOperation=null;
 				if (event.getSource() == DepositButton)
-					addOperation = new AddOperation(Double.parseDouble(amt));
+				{
+					app.setAmount(dep.getAmount());
+					app.compute(accnr,AddOperation.ENTRY_TYPE);
+				}
 				else if (event.getSource() == WithdrawButton)
-					addOperation = new SubtractOperation(Double.parseDouble(amt));
-				ITransaction transaction = new ComputeTransaction(accountManager, addOperation, iCustomerTemp.getAccount());
-				TransactionManager transactionManager = new TransactionManager();
-				transactionManager.submit(transaction);
+				{
+					app.setAmount(dep.getAmount());
+					app.compute(accnr,SubtractOperation.ENTRY_TYPE);
+				}
 				refreshTable();
 			}
 		}
-	}*/
+	}
 
 	protected void refreshTable()
 	{

@@ -8,11 +8,16 @@ package framework;
 
 import java.util.List;
 
+import banking.operation.AddInterestOperation;
 import framework.account.AccountManager;
 import framework.account.IAccount;
 import framework.account.factory.IAccountFactory;
 import framework.customer.ICustomer;
+import framework.operation.AddOperation;
+import framework.operation.IOperation;
+import framework.operation.SubtractOperation;
 import framework.transaction.AddAccountTransaction;
+import framework.transaction.ComputeTransaction;
 import framework.transaction.ITransaction;
 import framework.transaction.TransactionManager;
 import framework.ui.AFincoView;
@@ -25,7 +30,7 @@ public abstract class FinancialApp {
 	protected ICustomer customer;
 	protected String acctNumber;
 	protected String accountType;
-	protected double amount;
+	protected String amount;
 	
 	public FinancialApp(IAccountFactory factory ){
 		transactionManager=new TransactionManager();
@@ -55,23 +60,34 @@ public abstract class FinancialApp {
 		accountType = null;
 	}
 	
-	/*public void compute(){
+	public void compute(String acctNumber, String entryType){
 		ICustomer iCustomerTemp=accountManager.findCustomerByAccountNumber(acctNumber);
-		
-		String amt = getAmount();
+
+		String amt = this.amount;
 		if (amt!=null){
-			IOperation addOperation=null;
-			if (event.getSource() == DepositButton)
-				addOperation = new AddOperation(Double.parseDouble(amt));
-			else if (event.getSource() == WithdrawButton)
-				addOperation = new SubtractOperation(Double.parseDouble(amt));
-			ITransaction transaction = new ComputeTransaction(accountManager, addOperation, iCustomerTemp.getAccount());
-			TransactionManager transactionManager = new TransactionManager();
-			transactionManager.submit(transaction);
-			refreshTable();
+			IOperation operation=getOperation(amt, entryType);
+			ITransaction transaction = new ComputeTransaction(accountManager, operation, iCustomerTemp.getAccount());
+			this.transactionManager.submit(transaction);
 		}
-		
-	}*/
+	}
+	
+	public IOperation getOperation(String amt, String entryType)
+	{
+		IOperation operation=null;
+		if(AddOperation.ENTRY_TYPE.equals(entryType))
+			operation = new AddOperation(Double.parseDouble(amt));
+		else if(SubtractOperation.ENTRY_TYPE.equals(entryType))
+			operation = new SubtractOperation(Double.parseDouble(amt));
+		return operation;
+	}
+	
+	public void computeAll()
+	{
+		IOperation addOperation = getOperation("",null);
+		ITransaction transaction = new ComputeTransaction(accountManager, addOperation);
+		TransactionManager transactionManager = new TransactionManager();
+		transactionManager.submit(transaction);
+	}
 	
 	/**
 	 * 
@@ -115,15 +131,15 @@ public abstract class FinancialApp {
 	/**
 	 * @return the amount
 	 */
-	public double getAmount() {
+	public String getAmount() {
 		return amount;
 	}
 
 	/**
 	 * @param amount the amount to set
 	 */
-	public void setAmount(double amount) {
+	public void setAmount(String amount) {
 		this.amount = amount;
 	}
-
+	
 }

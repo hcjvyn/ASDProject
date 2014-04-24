@@ -5,7 +5,7 @@ import framework.account.IAccount;
 public class SubtractOperation extends AOperation{
 
 	private double amount;
-	private static final String ENTRY_TYPE="C";
+	public static final String ENTRY_TYPE="C";
 	
 	/**
 	 * Initialize all variables.

@@ -7,7 +7,7 @@ import framework.account.entry.IEntry;
 public class AddOperation extends AOperation{
 	
 	private double amount;
-	private static final String ENTRY_TYPE="D"; 
+	public static final String ENTRY_TYPE="D"; 
 
 	/**
 	 * Initialize all variables.

@@ -1,5 +1,8 @@
 package banking.ui;
 
+import javax.swing.JOptionPane;
+
+import banking.Bank;
 import banking.ui.dialog.AddCompAccDialog;
 import banking.ui.dialog.AddPersAccDialog;
 import framework.FinancialApp;
@@ -11,7 +14,7 @@ import framework.ui.dialog.AAddAccDialog;
  * A basic JFC based application.
  */
 public class BankView extends FincoView {
-
+	
 	javax.swing.JButton AddCompanyAccountButton = new javax.swing.JButton();
 	javax.swing.JButton AddinterestButton = new javax.swing.JButton();
 
@@ -59,11 +62,10 @@ public class BankView extends FincoView {
 				ExitButton_actionPerformed(event);
 			else if (object == AddCompanyAccountButton)
 				AddAccountButton_actionPerformed(new AddCompAccDialog());
-			/*else if (object == DepositButton || object == WithdrawButton)
+			else if (object == DepositButton || object == WithdrawButton)
 				computeActionPerformed(event);
 			else if (object == AddinterestButton)
 				addInterestActionPerformed(event);
-			*/
 		}
 	}
 
@@ -72,15 +74,12 @@ public class BankView extends FincoView {
 		return new AddPersAccDialog();
 	}
 
-	/*private void addInterestActionPerformed(java.awt.event.ActionEvent event)
+	private void addInterestActionPerformed(java.awt.event.ActionEvent event)
 	{
-		IOperation addOperation = new AddInterestOperation();
-		ITransaction transaction = new ComputeTransaction(accountManager, addOperation);
-		TransactionManager transactionManager = new TransactionManager();
-		transactionManager.submit(transaction);
+		app.computeAll();
 		JOptionPane.showMessageDialog(AddinterestButton, "Add interest to all accounts","Add interest to all accounts",JOptionPane.WARNING_MESSAGE);
 		refreshTable();
-	}*/
+	}
 
 	@Override
 	protected String[] fillRowData(ICustomer customerTemp)
@@ -94,5 +93,4 @@ public class BankView extends FincoView {
 		rowdata2[5] = Double.toString(customerTemp.getAccount().getBalance());
 		return rowdata2;
 	}
-
 }
