@@ -1,5 +1,8 @@
 package creditcard.ui;
 
+
+import java.util.List;
+
 import javax.swing.JButton;
 import javax.swing.UIManager;
 
@@ -73,11 +76,10 @@ public class CCardView extends FincoView {
 			Object object = event.getSource();
 			if (object == ExitButton)
 				ExitButton_actionPerformed(event);
-			/*else if (object == GenerateMonthlyBillsButton)
-				genMonBillsActionPerformed(event);
-			/*else if (object == DepositButton || object == WithdrawButton)
+			else if (object == DepositButton || object == WithdrawButton)
 				computeActionPerformed(event);
-			*/
+			else if (object == GenerateMonthlyBillsButton)
+				genMonBillsActionPerformed(event);
 		}
 	}
 
@@ -86,13 +88,13 @@ public class CCardView extends FincoView {
 		return new AddCCAccDialog();
 	}
 
-	/*private void genMonBillsActionPerformed(java.awt.event.ActionEvent event)
+	private void genMonBillsActionPerformed(java.awt.event.ActionEvent event)
 	{
-		System.out.println(accountManager.getCustomerList().get(0).getName());
-		GenBillDialog billFrm = new GenBillDialog(accountManager);
+		List<ICustomer> customerList=app.getCustomerList();
+		GenBillDialog billFrm = new GenBillDialog(customerList);
 		billFrm.setBounds(450, 20, 400, 350);
 		billFrm.show();
-	}*/
+	}
 
 	@Override
 	protected void setTable()

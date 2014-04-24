@@ -5,7 +5,7 @@ package creditcard.ui.dialog;
 */
 
 import java.awt.*;
-import java.util.ArrayList;
+import java.util.List;
 import java.util.Date;
 
 import javax.swing.*;
@@ -18,9 +18,9 @@ import framework.customer.ICustomer;
 public class GenBillDialog extends javax.swing.JDialog
 {
     String billstring;
-    AccountManager accountManager;
+    List<ICustomer> customerList;
     
-	public GenBillDialog(AccountManager accountManager)
+	public GenBillDialog(List<ICustomer> customerList)
 	{
 		//super(parent);
 		
@@ -31,7 +31,7 @@ public class GenBillDialog extends javax.swing.JDialog
 		// parse your Java file into its visual environment.
 		//{{INIT_CONTROLS
 		
-		this.accountManager=accountManager;
+		this.customerList=customerList;
 		
 		getContentPane().setLayout(null);
 		setSize(405,367);
@@ -47,9 +47,9 @@ public class GenBillDialog extends javax.swing.JDialog
 
 		// generate the string for the monthly bill
 		billstring="";
-		for(int i=0 ; i < accountManager.getCustomerList().size() ; i++)
+		for(int i=0 ; i < customerList.size() ; i++)
 		{
-			ICustomer iCustomerTemp=accountManager.getCustomerList().get(i);
+			ICustomer iCustomerTemp=customerList.get(i);
 			billstring +=  "Name= " + iCustomerTemp.getName() + "\r\n";
 			billstring += "Address= " + iCustomerTemp.getStreet() + ", " + iCustomerTemp.getCity() + ", " + iCustomerTemp.getState() + ", " + iCustomerTemp.getZip() + "\r\n";
 			
@@ -57,7 +57,7 @@ public class GenBillDialog extends javax.swing.JDialog
 			billstring += "CC number= " + iAccount.getAccountNum() + "\r\n";
 			billstring += "CC type= " + iAccount.getAccountType() + "\r\n";
 			
-			ArrayList<IEntry> iEntryList = iAccount.getEntryList();
+			List<IEntry> iEntryList = iAccount.getEntryList();
 			Date now=new Date();
 			double previousBalance=iAccount.getBalance(), totalCharges=0, totalCredits=0;
 			
