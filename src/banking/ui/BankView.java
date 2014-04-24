@@ -10,7 +10,7 @@ import framework.ui.dialog.AAddAccDialog;
 /**
  * A basic JFC based application.
  */
-public class BankGUI extends FincoView {
+public class BankView extends FincoView {
 
 	javax.swing.JButton AddCompanyAccountButton = new javax.swing.JButton();
 	javax.swing.JButton AddinterestButton = new javax.swing.JButton();
@@ -22,7 +22,7 @@ public class BankGUI extends FincoView {
 		setTableColumns(columnNames);
 	}
 
-	public BankGUI(FinancialApp app)
+	public BankView(FinancialApp app)
 	{
 		super(app);
 		setTitle("Bank Application.");

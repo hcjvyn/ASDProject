@@ -13,13 +13,13 @@ import framework.ui.dialog.AAddAccDialog;
 /**
  * A basic JFC based application.
  */
-public class CardGUI extends FincoView {
+public class CCardView extends FincoView {
 	/****
 	 * init variables in the object
 	 ****/
 	JButton GenerateMonthlyBillsButton = new JButton();
 
-	public CardGUI(FinancialApp app)
+	public CCardView(FinancialApp app)
 	{
 		super(app);
 		setTitle("Credit-card processing Application.");

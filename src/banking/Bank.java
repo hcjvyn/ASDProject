@@ -3,7 +3,7 @@ package banking;
 import javax.swing.UIManager;
 
 import banking.account.factory.BankAccountFactory;
-import banking.ui.BankGUI;
+import banking.ui.BankView;
 import framework.FinCo;
 import framework.FinancialApp;
 import framework.account.factory.IAccountFactory;
@@ -26,7 +26,7 @@ public class Bank extends FinancialApp {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		FinancialApp app = new Bank();
-		AFincoView view = new BankGUI(app);
+		AFincoView view = new BankView(app);
 		app.setView(view);
 		try {
 			// Add the following code if you want the Look and Feel

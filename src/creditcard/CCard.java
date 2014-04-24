@@ -3,7 +3,7 @@ package creditcard;
 import javax.swing.UIManager;
 
 import creditcard.account.factory.CCAccountFactory;
-import creditcard.ui.CardGUI;
+import creditcard.ui.CCardView;
 import framework.FinancialApp;
 import framework.ui.AFincoView;
 
@@ -19,7 +19,7 @@ public class CCard extends FinancialApp{
 
 	public static void main(String[] args) {
 		FinancialApp app = new CCard();
-		AFincoView view = new CardGUI(app);
+		AFincoView view = new CCardView(app);
 		app.setView(view);
 		
 		try {
