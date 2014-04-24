@@ -10,27 +10,22 @@ import java.util.List;
 
 import framework.account.AccountManager;
 import framework.account.IAccount;
-import framework.account.factory.AccountFactory;
 import framework.account.factory.IAccountFactory;
 import framework.customer.ICustomer;
-import framework.operation.AddOperation;
-import framework.operation.IOperation;
-import framework.operation.SubtractOperation;
 import framework.transaction.AddAccountTransaction;
-import framework.transaction.ComputeTransaction;
 import framework.transaction.ITransaction;
 import framework.transaction.TransactionManager;
 import framework.ui.AFincoView;
-import framework.ui.FincoView;
 
 public abstract class FinancialApp {
 	protected TransactionManager transactionManager=null;
 	protected AccountManager accountManager=null;
+	protected IAccountFactory factory;
 	protected AFincoView view;
 	protected ICustomer customer;
 	protected String acctNumber;
 	protected String accountType;
-	protected IAccountFactory factory;
+	protected double amount;
 	
 	public FinancialApp(IAccountFactory factory ){
 		transactionManager=new TransactionManager();
@@ -45,7 +40,6 @@ public abstract class FinancialApp {
 	 */
 	public void addCustomer() {
 		IAccountFactory iAccountFactory = factory;
-		System.out.println(customer + " acctNumber: " + acctNumber);
 		
 		IAccount iAccount = iAccountFactory.createAccount(customer, acctNumber, accountType);
 		if (iAccount!=null){
@@ -55,6 +49,10 @@ public abstract class FinancialApp {
 			transactionManager.submit(transaction);
 		}
 		
+		// Reset to null
+		customer = null;
+		acctNumber = null;
+		accountType = null;
 	}
 	
 	/*public void compute(){
@@ -113,6 +111,19 @@ public abstract class FinancialApp {
 	public AFincoView getView(){
 		return view;
 	}
-	
+
+	/**
+	 * @return the amount
+	 */
+	public double getAmount() {
+		return amount;
+	}
+
+	/**
+	 * @param amount the amount to set
+	 */
+	public void setAmount(double amount) {
+		this.amount = amount;
+	}
 
 }
