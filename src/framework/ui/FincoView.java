@@ -1,6 +1,7 @@
 package framework.ui;
 
 import java.awt.BorderLayout;
+import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -9,23 +10,16 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
-import framework.account.AccountManager;
+import framework.FinCo;
+import framework.FinancialApp;
 import framework.customer.ICustomer;
-import framework.operation.AddOperation;
-import framework.operation.IOperation;
-import framework.operation.SubtractOperation;
-import framework.transaction.AddAccountTransaction;
-import framework.transaction.ComputeTransaction;
-import framework.transaction.ITransaction;
-import framework.transaction.TransactionManager;
 import framework.ui.actions.SymWindow;
 import framework.ui.dialog.AAddAccDialog;
 import framework.ui.dialog.AddAccDialog;
-import framework.ui.dialog.AmountDialog;
 
-public class GUI extends JFrame {
-	protected TransactionManager transactionManager=new TransactionManager();
-	protected AccountManager accountManager=new AccountManager();
+public class FincoView extends AFincoView {
+	
+	protected FinancialApp app = null;
 
 	protected JPanel JPanel1 = new JPanel();
 	protected JButton AddAccountButton = new JButton();
@@ -44,8 +38,9 @@ public class GUI extends JFrame {
 		setTableColumns(columnNames);
 	}
 
-	public GUI()
+	public FincoView(FinancialApp view)
 	{
+		this.app = view; 
 		setTitle("FinCo Application.");
 		setDefaultCloseOperation(javax.swing.JFrame.DO_NOTHING_ON_CLOSE);
 		getContentPane().setLayout(new BorderLayout(0,0));
@@ -102,7 +97,7 @@ public class GUI extends JFrame {
 		rowdata = new String[columnNames.length];
 	}
 
-	public void addWindowListener(GUI frame){
+	public void addWindowListener(FincoView frame){
 		SymWindow aSymWindow = new SymWindow(this);
 		frame.addWindowListener(aSymWindow);
 	}
@@ -116,42 +111,44 @@ public class GUI extends JFrame {
 			if (object == ExitButton)
 				ExitButton_actionPerformed(event);
 			else if (object == AddAccountButton)
-				addAccountActionPerformed(event, getDialog());
-			else if (object == DepositButton || object == WithdrawButton)
-				computeActionPerformed(event);
+				AddAccountButton_actionPerformed(getAccountDialog());
+			/*else if (object == DepositButton || object == WithdrawButton)
+				computeActionPerformed(event);*/
 			/*else if (object == AddinterestButton)
 				AddinterestButton_actionPerformed(event);*/
 
 		}
-	}
 
-	protected AAddAccDialog getDialog(){
+	}
+	
+	protected AAddAccDialog getAccountDialog(){
 		return new AddAccDialog();
 	}
 
-	protected void addAccountActionPerformed(java.awt.event.ActionEvent event, AAddAccDialog pac)
-	{
-		/*
-		 JDialog_AddPAcc type object is for adding personal information
-		 construct a JDialog_AddPAcc type object 
-		 set the boundaries and show it 
-		 */
-
-		//AddAccDialog pac = new JDialog_AddPAcc();
+	
+	/**
+	 * 
+	 */
+	public void AddAccountButton_actionPerformed(AAddAccDialog pac) {
 		pac.setBounds(450, 20, 300, 400);
 		pac.show();
-
+		
 		ICustomer customer = pac.getCustomer();
-
+		String acctNumber = pac.getAcctNumber();
+		String acctType = pac.getAcctType();
+		
 		if (customer!=null) {
-			ITransaction transaction = new AddAccountTransaction(accountManager, customer);
-			TransactionManager transactionManager = new TransactionManager();
-			transactionManager.submit(transaction);
+			app.setCustomer(customer);
+			app.setAccountNumber(acctNumber);
+			app.setAccountType(acctType);
+			app.addCustomer();
 			refreshTable();
 		}
+
 	}
 
-	protected void computeActionPerformed(java.awt.event.ActionEvent event)
+	
+	/*protected void computeActionPerformed(java.awt.event.ActionEvent event)
 	{
 		int selection = JTable1.getSelectionModel().getMinSelectionIndex();
 		if (selection >=0){
@@ -178,16 +175,18 @@ public class GUI extends JFrame {
 				refreshTable();
 			}
 		}
-	}
+	}*/
 
 	protected void refreshTable()
 	{
+		List<ICustomer> customerList = app.getCustomerList();
+		
 		for(int i=model.getRowCount() - 1 ; i >= 0  ; i--)
 			model.removeRow(i);
 
-		for(int i=0 ; i < accountManager.getCustomerList().size() ; i++)
+		for(int i=0 ; i < customerList.size() ; i++)
 		{
-			ICustomer customerTemp = accountManager.getCustomerList().get(i);
+			ICustomer customerTemp = customerList.get(i);
 			model.addRow(fillRowData(customerTemp));
 		}
 		JTable1.setRowSelectionInterval(0, 0);
@@ -199,8 +198,6 @@ public class GUI extends JFrame {
 		rowdata2[0] = customerTemp.getAccount().getAccountNum();
 		rowdata2[1] = customerTemp.getName();
 		rowdata2[2] = customerTemp.getCity();
-		//		rowdata2[3] = customerTemp.getCustomerType();
-		//		rowdata2[4] = customerTemp.getAccount().getAccountType();
 		rowdata2[3] = Double.toString(customerTemp.getAccount().getBalance());
 		return rowdata2;
 	}
@@ -211,6 +208,7 @@ public class GUI extends JFrame {
 	{
 		System.exit(0);
 	}
+	
 
 
 }

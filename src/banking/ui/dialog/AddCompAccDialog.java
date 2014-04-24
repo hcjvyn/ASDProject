@@ -1,7 +1,8 @@
 package banking.ui.dialog;
 
-import banking.account.factory.CheckingAccountFactory;
-import banking.account.factory.SavingAccountFactory;
+
+import banking.account.CheckingAccount;
+import banking.account.SavingsAccount;
 import framework.account.factory.IAccountFactory;
 import framework.customer.Company;
 import framework.customer.ICustomer;
@@ -133,12 +134,18 @@ public class AddCompAccDialog extends AAddAccDialog {
 				zip);
 	}
 
+	/* (non-Javadoc)
+	 * @see framework.ui.dialog.AAddAccDialog#selectAccountType()
+	 */
 	@Override
-	protected IAccountFactory selectFactory() {
+	public String selectAccountType() {
 		if (JRadioButton_Chk.isSelected())
-			return new CheckingAccountFactory();
+			return CheckingAccount.ACCT_TYPE;
 		else
-			return new SavingAccountFactory();
+			return SavingsAccount.ACCT_TYPE;
+
 	}
+
+	
 
 }

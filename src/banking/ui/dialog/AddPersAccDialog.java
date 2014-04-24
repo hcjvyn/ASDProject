@@ -4,9 +4,8 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-import banking.account.factory.CheckingAccountFactory;
-import banking.account.factory.SavingAccountFactory;
-import framework.account.factory.IAccountFactory;
+import banking.account.CheckingAccount;
+import banking.account.SavingsAccount;
 import framework.customer.ICustomer;
 import framework.customer.Person;
 import framework.ui.dialog.AAddAccDialog;
@@ -183,12 +182,17 @@ public class AddPersAccDialog extends AAddAccDialog {
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see framework.ui.dialog.AAddAccDialog#selectAccountType()
+	 */
 	@Override
-	protected IAccountFactory selectFactory() {
+	public String selectAccountType() {
 		if (JRadioButton_Chk.isSelected())
-			return new CheckingAccountFactory();
+			return CheckingAccount.ACCT_TYPE;
 		else
-			return new SavingAccountFactory();
+			return SavingsAccount.ACCT_TYPE;
+
 	}
 
+	
 }

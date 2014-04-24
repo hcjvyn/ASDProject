@@ -9,6 +9,8 @@ import framework.customer.ICustomer;
 public abstract class AAddAccDialog extends JDialog {
 
 	protected ICustomer customer;
+	protected String acctNumber;
+	protected String acctType;
 	
 	public AAddAccDialog() {
 		//{{REGISTER_LISTENERS
@@ -51,15 +53,26 @@ public abstract class AAddAccDialog extends JDialog {
 	private void JButtonOK_actionPerformed(java.awt.event.ActionEvent event)
 	{
 		customer = createCustomer();
-		String accountnr = JTextField_ACNR.getText();
+		acctNumber = JTextField_ACNR.getText();
+		acctType = selectAccountType();
+		/*String accountnr = JTextField_ACNR.getText();
 
 		IAccountFactory iAccountFactory = selectFactory();
 		IAccount iAccount = iAccountFactory.createAccount(customer, accountnr);
-		customer.addAccount(iAccount);
+		customer.addAccount(iAccount);*/
 
 		dispose();
 	}
 	
+	public abstract String selectAccountType();
+	
+	/**
+	 * @return the acctType
+	 */
+	public String getAcctType() {
+		return acctType;
+	}
+
 	private void JButtonCalcel_actionPerformed(java.awt.event.ActionEvent event) 
 	{
     //make this frame invisible if Cancel button is clicked
@@ -68,10 +81,14 @@ public abstract class AAddAccDialog extends JDialog {
 	
 	protected abstract ICustomer createCustomer();
 	
-	protected abstract IAccountFactory selectFactory();
 	
 	public ICustomer getCustomer() {
 		return customer;
 	}
+	
+	public String getAcctNumber(){
+		return acctNumber;
+	}
+	
 
 }

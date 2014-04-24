@@ -5,21 +5,23 @@ import javax.swing.UIManager;
 
 import creditcard.ui.dialog.AddCCAccDialog;
 import creditcard.ui.dialog.GenBillDialog;
+import framework.FinancialApp;
 import framework.customer.ICustomer;
-import framework.ui.GUI;
+import framework.ui.FincoView;
 import framework.ui.dialog.AAddAccDialog;
 
 /**
  * A basic JFC based application.
  */
-public class CardGUI extends GUI {
+public class CardGUI extends FincoView {
 	/****
 	 * init variables in the object
 	 ****/
 	JButton GenerateMonthlyBillsButton = new JButton();
 
-	public CardGUI()
+	public CardGUI(FinancialApp app)
 	{
+		super(app);
 		setTitle("Credit-card processing Application.");
 
 		AddAccountButton.setText("Add Credit-card account");
@@ -71,26 +73,26 @@ public class CardGUI extends GUI {
 			Object object = event.getSource();
 			if (object == ExitButton)
 				ExitButton_actionPerformed(event);
-			else if (object == GenerateMonthlyBillsButton)
+			/*else if (object == GenerateMonthlyBillsButton)
 				genMonBillsActionPerformed(event);
-			else if (object == DepositButton || object == WithdrawButton)
+			/*else if (object == DepositButton || object == WithdrawButton)
 				computeActionPerformed(event);
-
+			*/
 		}
 	}
 
 	@Override
-	protected AAddAccDialog getDialog(){
+	protected AAddAccDialog getAccountDialog(){
 		return new AddCCAccDialog();
 	}
 
-	private void genMonBillsActionPerformed(java.awt.event.ActionEvent event)
+	/*private void genMonBillsActionPerformed(java.awt.event.ActionEvent event)
 	{
 		System.out.println(accountManager.getCustomerList().get(0).getName());
 		GenBillDialog billFrm = new GenBillDialog(accountManager);
 		billFrm.setBounds(450, 20, 400, 350);
 		billFrm.show();
-	}
+	}*/
 
 	@Override
 	protected void setTable()

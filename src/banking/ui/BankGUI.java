@@ -1,23 +1,16 @@
 package banking.ui;
 
-import javax.swing.JOptionPane;
-import javax.swing.UIManager;
-
-import banking.operation.AddInterestOperation;
 import banking.ui.dialog.AddCompAccDialog;
 import banking.ui.dialog.AddPersAccDialog;
+import framework.FinancialApp;
 import framework.customer.ICustomer;
-import framework.operation.IOperation;
-import framework.transaction.ComputeTransaction;
-import framework.transaction.ITransaction;
-import framework.transaction.TransactionManager;
-import framework.ui.GUI;
+import framework.ui.FincoView;
 import framework.ui.dialog.AAddAccDialog;
 
 /**
  * A basic JFC based application.
  */
-public class BankGUI extends GUI {
+public class BankGUI extends FincoView {
 
 	javax.swing.JButton AddCompanyAccountButton = new javax.swing.JButton();
 	javax.swing.JButton AddinterestButton = new javax.swing.JButton();
@@ -29,8 +22,9 @@ public class BankGUI extends GUI {
 		setTableColumns(columnNames);
 	}
 
-	public BankGUI()
+	public BankGUI(FinancialApp app)
 	{
+		super(app);
 		setTitle("Bank Application.");
 
 		JPanel1.add(JScrollPane1);
@@ -52,8 +46,6 @@ public class BankGUI extends GUI {
 		SymAction lSymAction = new SymAction();
 		ExitButton.addActionListener(lSymAction);
 		AddCompanyAccountButton.addActionListener(lSymAction);
-		//		DepositButton.addActionListener(lSymAction);
-		//		WithdrawButton.addActionListener(lSymAction);
 		AddinterestButton.addActionListener(lSymAction);
 
 	}
@@ -66,21 +58,21 @@ public class BankGUI extends GUI {
 			if (object == ExitButton)
 				ExitButton_actionPerformed(event);
 			else if (object == AddCompanyAccountButton)
-				addAccountActionPerformed(event, new AddCompAccDialog());
-			else if (object == DepositButton || object == WithdrawButton)
+				AddAccountButton_actionPerformed(new AddCompAccDialog());
+			/*else if (object == DepositButton || object == WithdrawButton)
 				computeActionPerformed(event);
 			else if (object == AddinterestButton)
 				addInterestActionPerformed(event);
-
+			*/
 		}
 	}
 
 	@Override
-	protected AAddAccDialog getDialog(){
+	protected AAddAccDialog getAccountDialog(){
 		return new AddPersAccDialog();
 	}
 
-	private void addInterestActionPerformed(java.awt.event.ActionEvent event)
+	/*private void addInterestActionPerformed(java.awt.event.ActionEvent event)
 	{
 		IOperation addOperation = new AddInterestOperation();
 		ITransaction transaction = new ComputeTransaction(accountManager, addOperation);
@@ -88,7 +80,7 @@ public class BankGUI extends GUI {
 		transactionManager.submit(transaction);
 		JOptionPane.showMessageDialog(AddinterestButton, "Add interest to all accounts","Add interest to all accounts",JOptionPane.WARNING_MESSAGE);
 		refreshTable();
-	}
+	}*/
 
 	@Override
 	protected String[] fillRowData(ICustomer customerTemp)

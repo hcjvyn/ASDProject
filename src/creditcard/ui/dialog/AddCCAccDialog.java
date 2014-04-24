@@ -8,10 +8,9 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-import creditcard.account.factory.GoldCCAccountFactory;
-import creditcard.account.factory.BronzeCCAccountFactory;
-import creditcard.account.factory.SilverCCAccountFactory;
-import framework.account.factory.IAccountFactory;
+import creditcard.account.BronzeCCAccount;
+import creditcard.account.GoldCCAccount;
+import creditcard.account.SilverCCAccount;
 import framework.customer.Customer;
 import framework.customer.ICustomer;
 import framework.ui.dialog.AAddAccDialog;
@@ -200,7 +199,7 @@ public class AddCCAccDialog extends AAddAccDialog {
 				zip, null);
 	}
 
-	@Override
+	/*@Override
 	protected IAccountFactory selectFactory() {
 		if (JRadioButton_Gold.isSelected())
 			return new GoldCCAccountFactory();
@@ -208,5 +207,18 @@ public class AddCCAccDialog extends AAddAccDialog {
 			return new SilverCCAccountFactory();
 		else
 			return new BronzeCCAccountFactory();
+	}*/
+
+	/* (non-Javadoc)
+	 * @see framework.ui.dialog.AAddAccDialog#selectAccountType()
+	 */
+	@Override
+	public String selectAccountType() {
+		if (JRadioButton_Gold.isSelected())
+			return GoldCCAccount.ACCT_TYPE;
+		else if (JRadioButton_Silver.isSelected())
+			return SilverCCAccount.ACCT_TYPE;
+		else
+			return BronzeCCAccount.ACCT_TYPE;
 	}
 }

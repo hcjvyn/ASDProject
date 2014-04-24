@@ -1,7 +1,5 @@
 package framework.ui.dialog;
 
-import framework.account.factory.AccountFactory;
-import framework.account.factory.IAccountFactory;
 import framework.customer.Customer;
 import framework.customer.ICustomer;
 
@@ -93,9 +91,14 @@ public class AddAccDialog extends AAddAccDialog {
 				state,
 				zip, null);
 	}
-	
-	protected IAccountFactory selectFactory() {
-		return new AccountFactory();
-	}
 
+	/* (non-Javadoc)
+	 * @see framework.ui.dialog.AAddAccDialog#selectAccountType()
+	 */
+	@Override
+	public String selectAccountType() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
 }

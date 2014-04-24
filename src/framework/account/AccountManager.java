@@ -1,13 +1,14 @@
 package framework.account;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import framework.customer.ICustomer;
 import framework.operation.IOperation;
 
 public class AccountManager {
 	
-	private ArrayList<ICustomer> customerList = new ArrayList<ICustomer>();
+	private List<ICustomer> customerList = new ArrayList<ICustomer>();
 	
 	public void addCustomer(ICustomer iCustomer) {
 		customerList.add(iCustomer);
@@ -27,7 +28,7 @@ public class AccountManager {
 		}
 	}
 	
-	public ArrayList<ICustomer> getCustomerList() {
+	public List<ICustomer> getCustomerList() {
 		return this.customerList;
 	}
 
