@@ -3,7 +3,7 @@ package framework;
 import javax.swing.UIManager;
 
 import framework.account.factory.AccountFactory;
-import framework.account.factory.IAccountFactory;
+import framework.ui.AFincoView;
 import framework.ui.FincoView;
 
 public class FinCo extends FinancialApp{
@@ -16,7 +16,7 @@ public class FinCo extends FinancialApp{
 	public static void main(String args[])
 	{
 		FinancialApp app = new FinCo();
-		FincoView view = new FincoView(app);
+		AFincoView view = new FincoView(app);
 		app.setView(view);
 		try {
 		    // Add the following code if you want the Look and Feel
